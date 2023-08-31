@@ -29,42 +29,43 @@ module.exports = {
       }
     ]
   ],
+  locales: {
+    '/': {
+      lang: 'zh-CN'
+    }
+  },
   "theme": "reco",
   "themeConfig": {
     "nav": [
       {
-        "text": "主页",
-        "link": "/",
-        "icon": "reco-home"
+        text: "主页",
+        link: "/",
+        icon: "reco-home"
       },
       {
-        "text": "TimeLine",
-        "link": "/timeline/",
-        "icon": "reco-date"
+        text: "日志",
+        link: "/timeline/",
+        icon: "reco-date"
       },
       {
-        "text": "文档",
-        "icon": "reco-message",
-        "items": [
-          {
-            "text": "vuepress-reco",
-            "link": "/docs/theme-reco/"
-          }
-        ]
-      },
-      {
-        text: "前端",
+        text: "文档",
+        icon: "reco-document",
         items: [
           { text: "CssWorld", link: "/docs/css-world/" },
         ],
       },
       {
-        "text": "Contact",
-        "icon": "reco-message",
-        "items": [
+        text: "社交账号",
+        icon: "reco-account",
+        items: [
+          {
+            "text": "Gitee",
+            "link": "https://gitee.com/pakhoc",
+            "icon": "reco-mayun"
+          },
           {
             "text": "GitHub",
-            "link": "https://github.com/recoluan",
+            "link": "https://github.com/Pakho12138",
             "icon": "reco-github"
           }
         ]
@@ -86,30 +87,57 @@ module.exports = {
         "9.3",
       ]
     },
-    "type": "blog",
-    "blogConfig": {
-      "category": {
-        "location": 2,
-        "text": "Category"
+    type: "blog",
+    blogConfig: {
+      category: {
+        location: 2,
+        text: "分类"
       },
-      "tag": {
-        "location": 3,
-        "text": "Tag"
-      }
+      tag: {
+        location: 3,
+        text: "标签"
+      },
+      socialLinks: [
+				// 信息栏展示社交信息
+				{
+					icon: 'reco-github',
+					link: 'https://github.com/Pakho12138',
+				},
+				{
+					icon: 'reco-mayun',
+					link: 'https://gitee.com/pakhoc',
+				},
+				{
+					icon: 'reco-gitlab',
+					link: 'https://gitlab.com/',
+				},
+				{
+					icon: 'reco-juejin',
+					link: 'https://juejin.cn/user/2342416329748863',
+				},
+				{
+					icon: 'reco-csdn',
+					link: 'https://www.csdn.net/',
+				},
+				{
+					icon: 'reco-npm',
+					link: 'https://www.npmjs.com/',
+				},
+			],
     },
     "friendLink": [
-      // {
-      //   "title": "午后南杂",
-      //   "desc": "Enjoy when you can, and endure when you must.",
-      //   "email": "1156743527@qq.com",
-      //   "link": "https://www.recoluan.com"
-      // },
-      // {
-      //   "title": "vuepress-theme-reco",
-      //   "desc": "A simple and beautiful vuepress Blog & Doc theme.",
-      //   "avatar": "https://vuepress-theme-reco.recoluan.com/icon_vuepress_reco.png",
-      //   "link": "https://vuepress-theme-reco.recoluan.com"
-      // }
+      {
+        "title": "午后南杂",
+        "desc": "Enjoy when you can, and endure when you must.",
+        "logo": "/avatar.png",
+        "link": "https://gitee.com/pakhoc"
+      },
+      {
+        "title": "vuepress-theme-reco",
+        "desc": "A simple and beautiful vuepress Blog & Doc theme.",
+        "logo": "/avatar.png",
+        "link": "https://gitee.com/pakhoc"
+      }
     ],
     "logo": "/logo.png",
     "search": true,
@@ -117,8 +145,13 @@ module.exports = {
     "lastUpdated": "Last Updated",
     "author": "Pakho",
     "authorAvatar": "/avatar.png",
-    "record": "xxxx",
-    "startYear": "2023"
+    "record": "v1.0.0",
+    "startYear": "2023",
+    // 评论插件
+    valineConfig: {
+      appId: 'vmCTZevnoxQKw5s8SY3zaWTW-gzGzoHsz',// your appId
+      appKey: 'VZ4UKu0rBRhwqf1BaQqW6UXd', // your appKey
+    },
   },
   "markdown": {
     "lineNumbers": true
