@@ -1,16 +1,15 @@
+const BASE_URL = 'https://pakhoc.gitee.io';
 const MUSIC_LIST = [
-  { artist: 'YOASOBI', name: '夜に駆ける'},
-].map((music) => ({  
+  { artist: 'YOASOBI', name: '夜に駆ける' },
+].map((music) => ({
   name: music.name,
   artist: music.artist,
-  url: `/music/${music.name}.mp3`,
-	cover: `/music/${music.name}.png`,
-  // link: `${BASE_URL}/assets/music/${music}.mp3`,
+  url: `${BASE_URL}/assets/music/${music.name}.mp3`,
+  cover: `${BASE_URL}/assets/music/${music.name}.png`,
 }))
 
 module.exports = {
   base: '/aincrad/',
-  bgImage: '/bannerBg.png',
   "title": "AINCRAD",
   "description": "Unlimited World",
   "dest": "public",
@@ -53,12 +52,12 @@ module.exports = {
           }
         ]
       },
-      // {
-      //   text: "前端",
-      //   items: [
-      //     { text: "CssWorld", link: "/docs/css-world/" },
-      //   ],
-      // },
+      {
+        text: "前端",
+        items: [
+          { text: "CssWorld", link: "/docs/css-world/" },
+        ],
+      },
       {
         "text": "Contact",
         "icon": "reco-message",
@@ -71,22 +70,21 @@ module.exports = {
         ]
       }
     ],
-    "sidebar": {
+    subSidebar: 'auto',
+    sidebar: {
       "/docs/theme-reco/": [
         "",
         "theme",
         "plugin",
         "api"
       ],
-      // "/docs/css-world/": [
-      //   // "第四章 更细致的样式表现",
-      //   // "第九章 文本字符处理能力的升级"
-      //   '',
-      //   '4.2',
-      //   '9.1',
-      //   '9.2',
-      //   '9.3',
-      // ],
+      "/docs/css-world/": [
+        "",
+        "4.2",
+        "9.1",
+        "9.2",
+        "9.3",
+      ]
     },
     "type": "blog",
     "blogConfig": {
@@ -100,18 +98,18 @@ module.exports = {
       }
     },
     "friendLink": [
-      {
-        "title": "午后南杂",
-        "desc": "Enjoy when you can, and endure when you must.",
-        "email": "1156743527@qq.com",
-        "link": "https://www.recoluan.com"
-      },
-      {
-        "title": "vuepress-theme-reco",
-        "desc": "A simple and beautiful vuepress Blog & Doc theme.",
-        "avatar": "https://vuepress-theme-reco.recoluan.com/icon_vuepress_reco.png",
-        "link": "https://vuepress-theme-reco.recoluan.com"
-      }
+      // {
+      //   "title": "午后南杂",
+      //   "desc": "Enjoy when you can, and endure when you must.",
+      //   "email": "1156743527@qq.com",
+      //   "link": "https://www.recoluan.com"
+      // },
+      // {
+      //   "title": "vuepress-theme-reco",
+      //   "desc": "A simple and beautiful vuepress Blog & Doc theme.",
+      //   "avatar": "https://vuepress-theme-reco.recoluan.com/icon_vuepress_reco.png",
+      //   "link": "https://vuepress-theme-reco.recoluan.com"
+      // }
     ],
     "logo": "/logo.png",
     "search": true,
@@ -120,7 +118,7 @@ module.exports = {
     "author": "Pakho",
     "authorAvatar": "/avatar.png",
     "record": "xxxx",
-    "startYear": "2017"
+    "startYear": "2023"
   },
   "markdown": {
     "lineNumbers": true

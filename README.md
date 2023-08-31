@@ -25,7 +25,7 @@ tagline: Light before, shadow behind.
 #   background: '#fff',
 #   borderRadius: '1rem',
 # }
-bgImage: /bannerBg.png
+bgImage: https://pakhoc.gitee.io/assets/images/bannerBg.png
 # bgImageStyle: {
 #   height: '1000px'
 # }

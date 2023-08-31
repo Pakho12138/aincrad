@@ -1,11 +1,11 @@
 @font-face {
   font-family: GLOBAL_FONT;
-  src: url('/fonts/Alimama_DongFangDaKai_Regular.woff') format('woff'), url('/fonts/Alimama_DongFangDaKai_Regular.woff2') format('woff'), url('/fonts/Alimama_DongFangDaKai_Regular.ttf') format('truetype');
+  src: url('/aincrad/fonts/Alimama_DongFangDaKai_Regular.woff') format('woff'), url('/aincrad/fonts/Alimama_DongFangDaKai_Regular.woff2') format('woff'), url('/aincrad/fonts/Alimama_DongFangDaKai_Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: GLOBAL_FONT1;
-  src: url('/fonts/云峰静龙行书.ttf') format('truetype');
+  src: url('/aincrad/fonts/云峰静龙行书.ttf') format('truetype');
 }
 
 * {
@@ -21,21 +21,25 @@
 }
 
 body {
-  cursor: url('/cursor/default.cur'), auto;
+  cursor: url('https://pakhoc.gitee.io/assets/cursor/default.cur'), auto;
 }
 
-button, input, a, .hover:hover, .tags span, .social-item, i {
-  cursor: url('/cursor/select.cur'), auto !important;
+button, input, a, .hover:hover, .tags span, .social-item, i, .reco-float-box, .nav-dropdown, .progress-bar, .volume-bar {
+  cursor: url('https://pakhoc.gitee.io/assets/cursor/select.cur'), auto !important;
 }
 
 input:focus {
-  cursor: url('/cursor/text.cur'), auto !important;
+  cursor: url('https://pakhoc.gitee.io/assets/cursor/text.cur'), auto !important;
 }
 
 // 标题
 .page .page-title .title {
   font-size: 2rem;
   font-weight: 600;
+}
+
+.sub-sidebar {
+  --background-color: transparent; 
 }
 
 .navbar {
