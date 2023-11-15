@@ -332,12 +332,16 @@ input:focus {
     .blog-list {
       .abstract-wrapper {
         .abstract-item {
+          --background-color: transparent;
+          backdrop-filter: blur(10px);
           border-radius: 0.8rem !important;
         }
       }
     }
 
     .info-wrapper {
+      --background-color: transparent;
+      backdrop-filter: blur(10px);
       border-radius: 0.8rem !important;
     }
 
@@ -533,7 +537,8 @@ input:focus {
 }
 
 .footer-wrapper {
-  background-color: #eee;
+  background-color: rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(10px) saturate(1.5);
 }
 
 .reco-bgm-panel .reco-bgm-box .reco-bgm-info .info-box  {

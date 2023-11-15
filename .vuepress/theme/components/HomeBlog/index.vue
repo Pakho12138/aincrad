@@ -112,6 +112,8 @@ export default defineComponent({
     return { recoShowModule, heroImageStyle, bgImageStyle, ...toRefs(state), getOneColor }
   },
   mounted() {
+    console.log("\n%c欢迎来到我的博客🎮我是Pakho！🚀", "color:#6366f1; background:#0b1021; font-size:1.5rem; padding:0.15rem 0.25rem; margin: 1rem auto; font-family: Rockwell; border: 2px solid #6366f1; border-radius: 4px;font-weight: bold; text-shadow: 1px 1px 1px #00af87bf;")
+    
     import('vue-canvas-effect/src/components/bubbles').then(module => {
       this.bubbles = module.default
     })
