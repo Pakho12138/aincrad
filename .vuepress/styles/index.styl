@@ -354,6 +354,19 @@ input:focus {
   }
 }
 
+.timeline-content::before{
+  content: '';
+  position: absolute;
+  top: -10px;
+  bottom: -30px;
+  left: -20px;
+  right: -20px;
+  border-radius: 10px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background: rgba(238, 238, 238, 0.3);
+}
+
 @media (max-width: 419px) {
   .home-blog {
     .hero {
@@ -537,7 +550,7 @@ input:focus {
 }
 
 .footer-wrapper {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(238, 238, 238, 0.3);
   backdrop-filter: blur(10px) saturate(1.5);
 }
 
