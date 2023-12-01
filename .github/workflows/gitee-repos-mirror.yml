@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: wearerequired/git-mirror-action@master #开源actions包
         env:
-          SSH_PRIVATE_KEY: "${{ secrets.GITEE_PRIVATE_KEY }}"
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
         with:
           source-repo: "git@github.com:Pakho12138/Aincrad.git" # github仓库地址
           destination-repo: "git@gitee.com:pakhoc/Aincrad.git" # gitee仓库地址
