@@ -1,10 +1,10 @@
 <template>
   <div class="home-blog">
     <div class="hero" :style="{ ...bgImageStyle }">
+      <!-- <video class="hero-video" :src="$frontmatter.bgVideo" preload="auto" autoplay muted loop></video> -->
       <div>
         <ModuleTransition>
-          <img class="hero-img" v-if="recoShowModule && $frontmatter.heroImage" :style="heroImageStyle || {}"
-            :src="$withBase($frontmatter.heroImage)" alt="hero" />
+          <img class="hero-img" v-if="recoShowModule && $frontmatter.heroImage" :style="heroImageStyle || {}" :src="$withBase($frontmatter.heroImage)" alt="hero" />
         </ModuleTransition>
 
         <ModuleTransition delay="0.04">
@@ -35,15 +35,14 @@
             <li class="category-item" v-for="(item, index) in this.$categories.list" :key="index">
               <router-link :to="item.path">
                 <span class="category-name">{{ item.name }}</span>
-                <span class="post-num" :style="{ 'backgroundColor': getOneColor() }">{{ item.pages.length }}</span>
+                <span class="post-num" :style="{ backgroundColor: getOneColor() }">{{ item.pages.length }}</span>
               </router-link>
             </li>
           </ul>
-          <hr>
+          <hr />
           <h4 v-if="$tags.list.length !== 0"><reco-icon icon="reco-tag" /> {{ $recoLocales.tag }}</h4>
           <TagList @getCurrentTag="getPagesByTags" />
-          <h4 v-if="$themeConfig.friendLink && $themeConfig.friendLink.length !== 0"><reco-icon icon="reco-friend" />
-            {{ $recoLocales.friendLink }}</h4>
+          <h4 v-if="$themeConfig.friendLink && $themeConfig.friendLink.length !== 0"><reco-icon icon="reco-friend" /> {{ $recoLocales.friendLink }}</h4>
           <FriendLink />
         </div>
       </div>
@@ -56,81 +55,99 @@
 </template>
 
 <script>
-import { defineComponent, toRefs, reactive, computed, onMounted } from 'vue'
-import TagList from '@theme/components/TagList'
-import FriendLink from '@theme/components/FriendLink'
-import NoteAbstract from '@theme/components/NoteAbstract'
-import { ModuleTransition, RecoIcon } from '@vuepress-reco/core/lib/components'
-import PersonalInfo from '@theme/components/PersonalInfo'
-import { getOneColor } from '@theme/helpers/other'
-import { useInstance, useShowModule } from '@theme/helpers/composable'
+import { defineComponent, toRefs, reactive, computed, onMounted } from 'vue';
+import TagList from '@theme/components/TagList';
+import FriendLink from '@theme/components/FriendLink';
+import NoteAbstract from '@theme/components/NoteAbstract';
+import { ModuleTransition, RecoIcon } from '@vuepress-reco/core/lib/components';
+import PersonalInfo from '@theme/components/PersonalInfo';
+import { getOneColor } from '@theme/helpers/other';
+import { useInstance, useShowModule } from '@theme/helpers/composable';
 
 export default defineComponent({
   components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo, RecoIcon },
-  data () {
+  data() {
     return {
       recoShow: false,
       currentPage: 1,
       tags: [],
       bubbles: null,
-      options: null
-    }
+      options: null,
+    };
   },
   setup(props, ctx) {
-    const instance = useInstance()
+    const instance = useInstance();
 
     const state = reactive({
       recoShow: false,
-      heroHeight: 0
-    })
+      heroHeight: 0,
+    });
 
-    const recoShowModule = useShowModule()
+    const recoShowModule = useShowModule();
 
-    const heroImageStyle = computed(() => instance.$frontmatter.heroImageStyle || {})
+    const heroImageStyle = computed(() => instance.$frontmatter.heroImageStyle || {});
 
     const bgImageStyle = computed(() => {
-      const url = instance.$frontmatter.bgImage
-        ? instance.$withBase(instance.$frontmatter.bgImage)
-        : require('../../images/bg.svg')
+      const url = instance.$frontmatter.bgImage ? instance.$withBase(instance.$frontmatter.bgImage) : require('../../images/bg.svg');
 
       const initBgImageStyle = {
         textAlign: 'center',
         overflow: 'hidden',
-        background: `url(${url}) center/cover no-repeat`
-      }
+        background: `url(${url}) center/cover no-repeat`,
+      };
 
-      const { bgImageStyle } = instance.$frontmatter
+      const { bgImageStyle } = instance.$frontmatter;
 
-      return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle
-    })
+      return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle;
+    });
 
     onMounted(() => {
-      state.heroHeight = document.querySelector('.hero').clientHeight
-      state.recoShow = true
-    })
+      state.heroHeight = document.querySelector('.hero').clientHeight;
+      state.recoShow = true;
+    });
 
-    return { recoShowModule, heroImageStyle, bgImageStyle, ...toRefs(state), getOneColor }
+    return { recoShowModule, heroImageStyle, bgImageStyle, ...toRefs(state), getOneColor };
   },
   mounted() {
-    console.log("\n%c欢迎来到我的博客🎮我是Pakho！🚀", "color:#6366f1; background:#0b1021; font-size:1.5rem; padding:0.15rem 0.25rem; margin: 1rem auto; font-family: Rockwell; border: 2px solid #6366f1; border-radius: 4px;font-weight: bold; text-shadow: 1px 1px 1px #00af87bf;")
-    
+    console.log(
+      '\n%c欢迎来到我的博客🎮我是Pakho！🚀',
+      'color:#6366f1; background:#0b1021; font-size:1.5rem; padding:0.15rem 0.25rem; margin: 1rem auto; font-family: Rockwell; border: 2px solid #6366f1; border-radius: 4px;font-weight: bold; text-shadow: 1px 1px 1px #00af87bf;'
+    );
+
     import('vue-canvas-effect/src/components/bubbles').then(module => {
-      this.bubbles = module.default
-    })
-    this.recoShow = true
+      this.bubbles = module.default;
+    });
+    this.recoShow = true;
+
+    // 添加向下滚动箭头
+    const ifJanchor = document.getElementById('JanchorDown');
+    ifJanchor && ifJanchor.parentNode.removeChild(ifJanchor);
+    let a = document.createElement('a');
+    a.id = 'JanchorDown';
+    a.className = 'anchor-down';
+    document.getElementsByClassName('hero')[0].append(a);
+    let targetA = document.getElementById('JanchorDown');
+    targetA.addEventListener('click', e => {
+      // 添加点击事件
+      this.scrollFn();
+    });
   },
 
   methods: {
     paginationChange(page) {
       setTimeout(() => {
-        window.scrollTo(0, this.heroHeight)
-      }, 100)
+        window.scrollTo(0, this.heroHeight);
+      }, 100);
     },
     getPagesByTags(tagInfo) {
-      this.$router.push({ path: tagInfo.path })
-    }
-  }
-})
+      this.$router.push({ path: tagInfo.path });
+    },
+    scrollFn() {
+      const windowH = document.getElementsByClassName('hero')[0].clientHeight - 58; // 获取窗口高度
+      document.documentElement.scrollTop = windowH; // 滚动条滚动到指定位置
+    },
+  },
+});
 </script>
 
 <style lang="stylus">
@@ -146,6 +163,15 @@ export default defineComponent({
     display flex
     align-items center
     justify-content center
+
+    .hero-video{
+      position absolute
+      width 100%
+      height 100%
+      object-fit cover
+      object-position center
+    }
+
     .hero-img {
       max-width: 300px;
       margin: 0 auto 1.5rem
@@ -317,5 +343,47 @@ export default defineComponent({
       }
     }
   }
+}
+
+/* -------------添加向下滚动箭头------------- */
+.anchor-down {
+  display: block;
+  margin: 12rem auto 0;
+  bottom: 45px;
+  width: 20px;
+  height: 20px;
+  font-size: 34px;
+  text-align: center;
+  animation: bounce-in 4s infinite;
+  position: absolute;
+  left: 50%;
+  bottom: 30%;
+  margin-left: -10px;
+  cursor: pointer;
+}
+@-webkit-keyframes bounce-in{
+  0%{transform:translateY(0)}
+  20%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+  80%{transform:translateY(0)}
+  to{transform:translateY(0)}
+}
+@keyframes bounce-in{
+  0%{transform:translateY(0)}
+  20%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+  80%{transform:translateY(0)}
+  to{transform:translateY(0)}
+}
+.anchor-down::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  display: block;
+  border-right: 3px solid #fff;
+  border-top: 3px solid #fff;
+  transform: rotate(135deg);
+  position: absolute;
+  bottom: 10px;
 }
 </style>
