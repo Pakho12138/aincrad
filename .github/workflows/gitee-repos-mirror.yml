@@ -1,15 +1,20 @@
-name: Sync To Gitee  #名字  可自定义
-on: page_build  #触发条件   page_build表示Github Page部署完成后触发
+name: Sync To Gitee #名字  可自定义
+# on: page_build #触发条件   page_build表示Github Page部署完成后触发
+on:
+  push:
+    branches: [master, gh-pages]
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: wearerequired/git-mirror-action@master #开源actions包
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-action@master #开源actions包
         env:
           SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
         with:
-          source-repo: "git@github.com:Pakho12138/Aincrad.git" # github仓库地址
-          destination-repo: "git@gitee.com:pakhoc/Aincrad.git" # gitee仓库地址
+          source-repo: 'git@github.com:Pakho12138/Aincrad.git' # github仓库地址
+          destination-repo: 'git@gitee.com:pakhoc/Aincrad.git' # gitee仓库地址
+
       - name: Build Gitee Pages
         uses: yanglbme/gitee-pages-action@main
         with:
