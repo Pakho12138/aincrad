@@ -98,32 +98,32 @@ module.exports = {
         text: "标签"
       },
       socialLinks: [
-				// 信息栏展示社交信息
-				{
-					icon: 'reco-github',
-					link: 'https://github.com/Pakho12138',
-				},
-				{
-					icon: 'reco-mayun',
-					link: 'https://gitee.com/pakhoc',
-				},
-				{
-					icon: 'reco-gitlab',
-					link: 'https://gitlab.com/',
-				},
-				{
-					icon: 'reco-juejin',
-					link: 'https://juejin.cn/user/2342416329748863',
-				},
-				{
-					icon: 'reco-csdn',
-					link: 'https://www.csdn.net/',
-				},
-				{
-					icon: 'reco-npm',
-					link: 'https://www.npmjs.com/',
-				},
-			],
+        // 信息栏展示社交信息
+        {
+          icon: 'reco-github',
+          link: 'https://github.com/Pakho12138',
+        },
+        {
+          icon: 'reco-mayun',
+          link: 'https://gitee.com/pakhoc',
+        },
+        {
+          icon: 'reco-gitlab',
+          link: 'https://gitlab.com/',
+        },
+        {
+          icon: 'reco-juejin',
+          link: 'https://juejin.cn/user/2342416329748863',
+        },
+        {
+          icon: 'reco-csdn',
+          link: 'https://www.csdn.net/',
+        },
+        {
+          icon: 'reco-npm',
+          link: 'https://www.npmjs.com/',
+        },
+      ],
     },
     "friendLink": [
       {
@@ -154,7 +154,7 @@ module.exports = {
     },
   },
   "markdown": {
-    "lineNumbers": true
+    "lineNumbers": true,
   },
   plugins: [
     // 看板娘
@@ -261,6 +261,15 @@ module.exports = {
         replace: false,  // false 默认图 true 换图 需要填写httpUrl地址
         httpUrl: '...'     // 绝对路径
       }
+    }],
+    // 代码复制
+    ['vuepress-plugin-code-copy', {
+      // selector: String,
+      // align: String,
+      color: '#d9393b',
+      // backgroundTransition: Boolean,
+      // backgroundColor: String,
+      successText: '复制成功'
     }],
     // 阅读进度条
     'reading-progress',
