@@ -81,7 +81,7 @@ module.exports = {
     lastUpdated: "Last Updated",
     author: "Pakho",
     authorAvatar: "/avatar.png",
-    noFoundPageByTencent: false, //关闭404
+    // noFoundPageByTencent: false, //关闭404
     record: "v1.0.0",
     startYear: "2023",
     // 评论插件
