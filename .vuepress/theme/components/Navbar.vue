@@ -16,7 +16,10 @@
             }
           : {}
       ">
-      <Mode />
+
+      <!-- 日夜模式转换 -->
+      <DayAndNight title="切换模式" />
+
       <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
       <SearchBox v-else-if="$themeConfig.search !== false && $frontmatter.search !== false" />
       <NavLinks class="can-hide" />
@@ -30,7 +33,7 @@ import AlgoliaSearchBox from '@AlgoliaSearchBox';
 import SearchBox from '@SearchBox';
 import SidebarButton from '@theme/components/SidebarButton';
 import NavLinks from '@theme/components/NavLinks';
-import Mode from '@theme/components/Mode';
+import DayAndNight from '@theme/components/Mode/DayAndNight';
 import { useInstance } from '@theme/helpers/composable';
 function throttle(func, delay) {
   let timer = null;
@@ -53,7 +56,7 @@ function throttle(func, delay) {
 }
 
 export default defineComponent({
-  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox, Mode },
+  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox, DayAndNight },
   data() {
     return {
       navbarFixed: false,
