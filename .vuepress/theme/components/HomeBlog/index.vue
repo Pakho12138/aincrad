@@ -350,38 +350,38 @@ export default defineComponent({
   display: block;
   margin: 12rem auto 0;
   bottom: 45px;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   font-size: 34px;
   text-align: center;
   animation: bounce-in 4s infinite;
   position: absolute;
   left: 50%;
   bottom: 30%;
-  margin-left: -10px;
+  margin-left: -15px;
   cursor: pointer;
 }
 @-webkit-keyframes bounce-in{
-  0%{transform:translateY(0)}
-  20%{transform:translateY(0)}
-  50%{transform:translateY(-20px)}
-  80%{transform:translateY(0)}
-  to{transform:translateY(0)}
+  0%{transform:translateY(0); opacity: 1}
+  20%{transform:translateY(0); opacity: 1}
+  50%{transform:translateY(-20px); opacity: 0.5}
+  80%{transform:translateY(0); opacity: 1}
+  to{transform:translateY(0); opacity: 1}
 }
 @keyframes bounce-in{
-  0%{transform:translateY(0)}
-  20%{transform:translateY(0)}
-  50%{transform:translateY(-20px)}
-  80%{transform:translateY(0)}
-  to{transform:translateY(0)}
+  0%{transform:translateY(0); opacity: 1}
+  20%{transform:translateY(0); opacity: 1}
+  50%{transform:translateY(-20px); opacity: 0.5}
+  80%{transform:translateY(0); opacity: 1}
+  to{transform:translateY(0); opacity: 1}
 }
 .anchor-down::before {
   content: "";
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   display: block;
-  border-right: 3px solid #fff;
-  border-top: 3px solid #fff;
+  border-right: 4px solid #fff;
+  border-top: 4px solid #fff;
   transform: rotate(135deg);
   position: absolute;
   bottom: 10px;
