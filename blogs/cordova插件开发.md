@@ -11,7 +11,7 @@ categories:
 
 ## 1. 安装plugman
 
-```shell
+```sh
 npm install plugman -g
 ```
 
@@ -19,7 +19,7 @@ npm install plugman -g
 
 ## 2. 新建插件
 
-```shell
+```sh
 plugman create --name TestPlugin --plugin_id cordova-plugin-testplugin --plugin_version 1.0.0
 ```
 
@@ -27,7 +27,7 @@ plugman create --name TestPlugin --plugin_id cordova-plugin-testplugin --plugin_
 
 ## 3. 添加平台
 
-```shell
+```sh
 cd TestPlugin
 plugman platform add --platform_name android
 ```
@@ -36,7 +36,7 @@ plugman platform add --platform_name android
 
 ## 4. 初始化package.json
 
-```shell
+```sh
 npm init
 ```
 
@@ -46,19 +46,19 @@ npm init
 
 * 查看安装了哪些插件
 
-  ```shell
+  ```sh
   ionic cordova plugin ls
   ```
 
 * 添加插件
 
-  ```shell
+  ```sh
   ionic cordova plugin add G:\app\test\TestPlugin
   ```
 
 * 删除插件
 
-  ```shell
+  ```sh
   ionic cordova plugin remove cordova-plugin-testplugin
   ```
 

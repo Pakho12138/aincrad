@@ -13,25 +13,25 @@ categories:
 
 1. 查看npm镜像设置
 
-   ```shell
+   ```sh
    npm config get registry
    ```
 
 2. 将npm设置为淘宝镜像
 
-   ```shell
+   ```sh
    npm config set registry https://registry.npm.taobao.org
    ```
 
 3. 再次查看npm镜像设置
 
-   ```shell
+   ```sh
    npm config get registry
    ```
 
 4. 重新install
 
-   ```shell
+   ```sh
    npm install
    ```
 
