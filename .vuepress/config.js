@@ -263,14 +263,17 @@ module.exports = {
       }
     }],
     // 代码复制
-    ['vuepress-plugin-code-copy', {
-      // selector: String,
-      // align: String,
-      color: '#d9393b',
-      // backgroundTransition: Boolean,
-      // backgroundColor: String,
-      successText: '复制成功'
-    }],
+    [
+      "vuepress-plugin-copy-copyright",
+      {
+        copyText: "复制代码",
+        tip: { content: "复制成功" },
+        copyright: false,
+        authorName: 'Pakho',
+      }
+    ],
+    // loading页面
+    '@vuepress-reco/vuepress-plugin-loading-page',
     // 阅读进度条
     'reading-progress',
     // 小猫goTop

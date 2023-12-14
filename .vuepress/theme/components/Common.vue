@@ -2,6 +2,10 @@
   <div class="theme-container" :class="pageClasses">
     <div v-if="!absoluteEncryption">
       <transition name="fade">
+        <LoadingPage v-show="firstLoad" class="loading-wrapper" />
+      </transition>
+
+      <transition name="fade">
         <Password v-show="!firstLoad && !isHasKey" class="password-wrapper-out" key="out" />
       </transition>
 
@@ -25,6 +29,7 @@
     </div>
     <div v-else>
         <transition name="fade">
+          <LoadingPage v-if="firstLoad" />
           <Password v-if="!isHasKey" />
         </transition>
         <div v-if="isHasKey">
@@ -184,7 +189,7 @@ export default defineComponent({
       width: 0
       height: 0
   .loading-wrapper
-    position absolute
+    position fixed
     z-index 22
     top 0
     bottom 0
