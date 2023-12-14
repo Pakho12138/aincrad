@@ -20,7 +20,7 @@
   font-family: none;
 }
 
-body, .friend-link-item, .popup-window-wrapper,  {
+body, .friend-link-item, .popup-window-wrapper {
   cursor: url('https://pakhoc.gitee.io/assets/cursor/default.cur'), auto !important;
 }
 
@@ -78,13 +78,6 @@ input:focus {
     pre {
       padding-top: 2rem;
       padding-bottom: 2rem;
-
-      // .code-copy {
-      //   position: absolute;
-      //   top: 50px;
-      //   right: 10px;
-      //   z-index 20;
-      // }
     }
 
     .line-numbers-wrapper {
@@ -381,6 +374,17 @@ input:focus {
       transform: translate3d(-10px, -10px, 10px);
       filter: drop-shadow(1px 1px 5px #ccc);
       width: 200px;
+    }
+
+    // 实现掘金同款头像旋转
+    .personal-info-wrapper {
+      img:hover {
+        transform: rotate(666turn);
+        transition-delay: 1s;
+        transition-property: all;
+        transition-duration: 59s;
+        transition-timing-function: cubic-bezier(0.34, 0, 0.84, 1);
+      }
     }
   }
 }
