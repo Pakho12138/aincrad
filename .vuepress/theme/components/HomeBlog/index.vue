@@ -354,7 +354,7 @@ export default defineComponent({
   height: 30px;
   font-size: 34px;
   text-align: center;
-  animation: bounce-in 4s infinite;
+  animation: bounce-in 3.5s infinite;
   position: absolute;
   left: 50%;
   bottom: 30%;
@@ -363,16 +363,12 @@ export default defineComponent({
 }
 @-webkit-keyframes bounce-in{
   0%{transform:translateY(0); opacity: 1}
-  20%{transform:translateY(0); opacity: 1}
   50%{transform:translateY(-20px); opacity: 0.5}
-  80%{transform:translateY(0); opacity: 1}
   to{transform:translateY(0); opacity: 1}
 }
 @keyframes bounce-in{
   0%{transform:translateY(0); opacity: 1}
-  20%{transform:translateY(0); opacity: 1}
   50%{transform:translateY(-20px); opacity: 0.5}
-  80%{transform:translateY(0); opacity: 1}
   to{transform:translateY(0); opacity: 1}
 }
 .anchor-down::before {
