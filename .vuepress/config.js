@@ -4,7 +4,7 @@ const sidebar = require("./config/sidebar");
 const friendLink = require("./config/friendLink");
 
 module.exports = {
-  base: './',
+  base: '/aincrad/',
   title: "AINCRAD",
   description: "别让认知束缚了自己",
   dest: "public",
