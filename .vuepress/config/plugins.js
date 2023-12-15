@@ -129,5 +129,5 @@ module.exports = [
     // 阅读进度条
     'reading-progress',
     // 小猫goTop
-    // 'go-top'
+    'go-top'
 ]
