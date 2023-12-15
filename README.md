@@ -1,7 +1,7 @@
 ---
 home: true
 heroText: 光明在前，阴影在后
-tagline: Light before, shadow behind.
+tagline: ['Light before, shadow behind.']
 # 原来的配置内容
 # heroImage: /hero.png
 # heroImageStyle: {
@@ -41,5 +41,3 @@ features:
 - title: Tomorrow
   details: 希望更多的爱好者能够参与进来，帮助这个主题更好的成长
 ---
-
-<style>

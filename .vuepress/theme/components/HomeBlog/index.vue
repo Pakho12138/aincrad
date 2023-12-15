@@ -8,15 +8,15 @@
         </ModuleTransition>
 
         <ModuleTransition delay="0.04">
-          <h1 v-if="recoShowModule && $frontmatter.heroText !== null">
+          <h1 class="hover" v-if="recoShowModule && $frontmatter.heroText !== null">
             {{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}
           </h1>
         </ModuleTransition>
 
         <ModuleTransition delay="0.08">
-          <p v-if="recoShowModule && $frontmatter.tagline !== null" class="description">
-            {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }}
-          </p>
+          <span id="description" v-if="recoShowModule && $frontmatter.tagline !== null" class="description hover">
+            <!-- {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }} -->
+          </span>
         </ModuleTransition>
       </div>
       <component v-if="bubbles" :is="bubbles" :options="options"></component>
@@ -63,6 +63,7 @@ import { ModuleTransition, RecoIcon } from '@vuepress-reco/core/lib/components';
 import PersonalInfo from '@theme/components/PersonalInfo';
 import { getOneColor } from '@theme/helpers/other';
 import { useInstance, useShowModule } from '@theme/helpers/composable';
+import Typed from "@theme/lib/typed.js";
 
 export default defineComponent({
   components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo, RecoIcon },
@@ -104,6 +105,15 @@ export default defineComponent({
     onMounted(() => {
       state.heroHeight = document.querySelector('.hero').clientHeight;
       state.recoShow = true;
+
+      new Typed('#description', {
+        strings: instance.$frontmatter.tagline,
+        typeSpeed: 35,
+        backDelay: 1500,
+        backSpeed: 25,
+        cursorChar: ' __',
+        loop: true,
+      });
     });
 
     return { recoShowModule, heroImageStyle, bgImageStyle, ...toRefs(state), getOneColor };
