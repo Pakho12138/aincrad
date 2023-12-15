@@ -4,7 +4,7 @@ const sidebar = require("./config/sidebar");
 const friendLink = require("./config/friendLink");
 
 module.exports = {
-  base: './',
+  base: '/aincrad/',
   title: "AINCRAD",
   description: "别让认知束缚了自己",
   dest: "public",
@@ -81,7 +81,7 @@ module.exports = {
     lastUpdated: "Last Updated",
     author: "Pakho",
     authorAvatar: "/avatar.png",
-    // noFoundPageByTencent: false, //关闭404
+    noFoundPageByTencent: false, //关闭404
     record: "v1.0.0",
     startYear: "2023",
     // 评论插件
