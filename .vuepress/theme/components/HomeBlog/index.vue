@@ -1,7 +1,7 @@
 <template>
   <div class="home-blog">
     <div class="hero" :style="{ ...bgImageStyle }">
-      <!-- <video class="hero-video" :src="$frontmatter.bgVideo" preload="auto" autoplay muted loop></video> -->
+      <video v-if="$frontmatter.bgVideo" class="hero-video" :src="$frontmatter.bgVideo" preload="auto" autoplay muted loop></video>
       <div>
         <ModuleTransition>
           <img class="hero-img" v-if="recoShowModule && $frontmatter.heroImage" :style="heroImageStyle || {}" :src="$withBase($frontmatter.heroImage)" alt="hero" />

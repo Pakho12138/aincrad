@@ -26,7 +26,12 @@ tagline: ['Light before, shadow behind.']
 #   borderRadius: '1rem',
 # }
 bgImage: https://pakhoc.gitee.io/assets/images/bannerBg.png
-bgVideo: https://pakhoc.gitee.io/assets/video/YOASOBI_BiriBiri.mov
+# bgVideo: https://pakhoc.gitee.io/assets/video/YOASOBI_BiriBiri.mov
+# 昼
+# bgVideo: https://cdnqabankinsurancemedia.qzhanye.com/upload/media/admin_1/20231228/tnD2ZhWrMJrNWbQkcrf528NeGcQwFwCH.mp4?auth_key=1703852324-0-0-0b0d902478e6bb7b2bb705428560aa20
+# 夜
+# bgVideo: https://cdnqabankinsurancemedia.qzhanye.com/upload/media/admin_1/20231228/keC455bNHitjFdndw5YaPzSBF3Jrnpcf.mp4?auth_key=1703856012-0-0-30211a47255fb604adbdb913c6d55dab
+bgVideo: https://cdnqabankinsurancemedia.qzhanye.com/upload/media/admin_1/20231207/yXETwzFbJQdPGBc8EFJGwcr5f7em8nPi__CTY__BytROBlJQbBBl5IiHwgASgdZVeoZ9gZuOLP9bVYwU6Dc0DQgNUeiL.mp4?auth_key=1703855629-0-0-57e5b3565428447bf08ce211dc7ce44e
 # bgImageStyle: {
 #   height: '1000px'
 # }
