@@ -23,6 +23,7 @@ module.exports = {
         content: "width=device-width,initial-scale=1,user-scalable=no"
       }
     ],
+    // 解决防盗链导致403问题
     [
       'meta',
       {
