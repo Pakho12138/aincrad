@@ -1,14 +1,14 @@
 module.exports = [
     {
-        title: "午后南杂",
-        desc: "Enjoy when you can, and endure when you must.",
-        logo: "/avatar.png",
-        link: "https://gitee.com/pakhoc"
+        title: "在线时钟",
+        desc: "https://pakhoc.gitee.io/time",
+        logo: "/logo.png",
+        link: "https://pakhoc.gitee.io/time"
     },
     {
-        title: "vuepress-theme-reco",
-        desc: "A simple and beautiful vuepress Blog & Doc theme.",
-        logo: "/avatar.png",
-        link: "https://gitee.com/pakhoc"
+        title: "3D旋转轮播",
+        desc: "https://pakhoc.gitee.io/3dbanner",
+        logo: "/logo.png",
+        link: "https://pakhoc.gitee.io/3dbanner"
     }
 ];

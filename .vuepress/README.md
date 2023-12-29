@@ -26,7 +26,7 @@ tagline: ['Light before, shadow behind.']
 #   borderRadius: '1rem',
 # }
 bgImage: https://pakhoc.gitee.io/assets/images/bannerBg.png
-bgVideo: https://pakhoc.gitee.io/assets/video/YOASOBI_BiriBiri.mov
+# bgVideo: https://pakhoc.gitee.io/assets/video/YOASOBI_BiriBiri.mov
 # bgImageStyle: {
 #   height: '1000px'
 # }
