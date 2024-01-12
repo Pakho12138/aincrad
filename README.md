@@ -1,7 +1,7 @@
 ---
 home: true
-heroText: 光明在前，阴影在后
-tagline: ['Light before, shadow behind.']
+heroText: 爱自己，是终生浪漫的开始
+tagline: ['To love oneself is the beginning of a life long romance.']
 # 原来的配置内容
 # heroImage: /hero.png
 # heroImageStyle: {
