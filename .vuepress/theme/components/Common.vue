@@ -59,10 +59,10 @@ import SubSidebar from '@theme/components/SubSidebar'
 import { setTimeout } from 'timers'
 import { useInstance } from '@theme/helpers/composable'
 
-import LoadingPage from '@theme/components/LoadingPage'
+// import LoadingPage from '@theme/components/LoadingPage'
 
 export default defineComponent({
-  components: { Sidebar, Navbar, Password, PersonalInfo, SubSidebar, LoadingPage },
+  components: { Sidebar, Navbar, Password, PersonalInfo, SubSidebar },
 
   props: {
     sidebar: {

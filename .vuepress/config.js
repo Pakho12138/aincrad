@@ -97,6 +97,9 @@ module.exports = {
       appId: 'vmCTZevnoxQKw5s8SY3zaWTW-gzGzoHsz',// your appId
       appKey: 'VZ4UKu0rBRhwqf1BaQqW6UXd', // your appKey
     },
+    heroImages: [
+      'https://pakhoc.gitee.io/assets/images/bannerBg.png'
+    ],
     // config目录
     nav,
     sidebar,

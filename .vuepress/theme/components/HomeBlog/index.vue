@@ -63,7 +63,7 @@ import { ModuleTransition, RecoIcon } from '@vuepress-reco/core/lib/components';
 import PersonalInfo from '@theme/components/PersonalInfo';
 import { getOneColor } from '@theme/helpers/other';
 import { useInstance, useShowModule } from '@theme/helpers/composable';
-import Typed from "@theme/lib/typed.js";
+import Typed from '@theme/lib/typed.js';
 
 export default defineComponent({
   components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo, RecoIcon },
@@ -88,15 +88,33 @@ export default defineComponent({
 
     const heroImageStyle = computed(() => instance.$frontmatter.heroImageStyle || {});
 
+    // 原先的背景封面图片
+    // const bgImageStyle = computed(() => {
+    //   const url = instance.$frontmatter.bgImage ? instance.$withBase(instance.$frontmatter.bgImage) : require('../../images/bg.svg');
+
+    //   const initBgImageStyle = {
+    //     textAlign: 'center',
+    //     overflow: 'hidden',
+    //     background: `url(${url}) center/cover no-repeat`,
+    //   };
+
+    //   const { bgImageStyle } = instance.$frontmatter;
+
+    //   return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle;
+    // });
+
+    // 自定义修改的背景图片设置, 随机产生一张图片
     const bgImageStyle = computed(() => {
-      const url = instance.$frontmatter.bgImage ? instance.$withBase(instance.$frontmatter.bgImage) : require('../../images/bg.svg');
+      const url = instance.$themeConfig.heroImages[Math.floor(Math.random() * instance.$themeConfig.heroImages.length)]
+        ? instance.$withBase(instance.$themeConfig.heroImages[Math.floor(Math.random() * instance.$themeConfig.heroImages.length)])
+        : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
 
       const initBgImageStyle = {
         textAlign: 'center',
         overflow: 'hidden',
-        background: `url(${url}) center/cover no-repeat`,
+        background: `url(${url}) center/cover no-repeat `,
       };
-
+      // 获取用户自定义的样式，优先更高
       const { bgImageStyle } = instance.$frontmatter;
 
       return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle;
