@@ -1,6 +1,7 @@
 <template>
   <div class="home-blog">
-    <div class="hero" :style="{ ...bgImageStyle }">
+    <div class="hero">
+      <div class="hero-bg" :style="{ ...bgImageStyle }"></div>
       <video v-if="$frontmatter.bgVideo" class="hero-video" :src="$frontmatter.bgVideo" preload="auto" autoplay muted loop></video>
       <div>
         <ModuleTransition>
@@ -14,9 +15,11 @@
         </ModuleTransition>
 
         <ModuleTransition delay="0.08">
-          <span id="description" v-if="recoShowModule && $frontmatter.tagline !== null" class="description hover">
-            <!-- {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }} -->
-          </span>
+          <div>
+            <span id="description" v-if="recoShowModule && $frontmatter.tagline !== null" class="description hover">
+              <!-- {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }} -->
+            </span>
+          </div>
         </ModuleTransition>
       </div>
       <component v-if="bubbles" :is="bubbles" :options="options"></component>
@@ -191,6 +194,15 @@ export default defineComponent({
     display flex
     align-items center
     justify-content center
+    text-align center
+    overflow hidden
+
+    .hero-bg{
+      position absolute
+      width 100%
+      height 100%
+      animation zoom-in 10s linear forwards
+    }
 
     .hero-video{
       position absolute
@@ -409,5 +421,12 @@ export default defineComponent({
   transform: rotate(135deg);
   position: absolute;
   bottom: 10px;
+}
+
+@-webkit-keyframes zoom-in{
+  to{transform:scale(1.1);}
+}
+@keyframes zoom-in{
+  to{transform:scale(1.1);}
 }
 </style>

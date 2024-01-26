@@ -98,7 +98,17 @@ module.exports = {
       appKey: 'VZ4UKu0rBRhwqf1BaQqW6UXd', // your appKey
     },
     heroImages: [
-      'https://pakhoc.gitee.io/assets/images/bannerBg.png'
+      // 'https://pakhoc.gitee.io/assets/images/bannerBg.png',
+      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251856878.png',
+      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251812451.jpg',
+      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251850713.png',
+      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251850712.jpg',
+      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251850711.jpg',
+      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251850710.jpg',
+      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251850709.jpg',
+      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251850708.jpg',
+      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251850706.jpg',
+      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251909981.jpg',
     ],
     // config目录
     nav,
