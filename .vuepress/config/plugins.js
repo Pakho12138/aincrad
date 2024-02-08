@@ -44,9 +44,12 @@ module.exports = [
     // }],
     // 看板娘
     [
-        '@vuepress-reco/vuepress-plugin-kan-ban-niang', {
+        'plugins/vuepress-plugin-kan-ban-niang', {
+            // theme: [
+            //     'xiaomai', 'shield', 'wanko', 'miku', 'whiteCat', 'haru1', 'haru2', 'haruto', 'koharu', 'izumi', 'shizuku', 'blackCat', 'z16'
+            // ],
             theme: [
-                'wanko', 'miku', 'whiteCat', 'haru1', 'haru2', 'haruto', 'koharu', 'izumi', 'shizuku', 'blackCat', 'z16'
+                'shield', 'wanko', 'shizuku', 'xiaomai'
             ],
             clean: false,
             messages: {
