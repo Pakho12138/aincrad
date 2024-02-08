@@ -201,7 +201,7 @@ export default defineComponent({
       position absolute
       width 100%
       height 100%
-      animation zoom-in 10s linear forwards
+      animation zoom-in 10s linear forwards, fade-in 2.5s linear forwards
     }
 
     .hero-video{
@@ -428,5 +428,13 @@ export default defineComponent({
 }
 @keyframes zoom-in{
   to{transform:scale(1.1);}
+}
+@-webkit-keyframes fade-in{
+  from{filter: blur(5px);}
+  to{filter: blur(0);}
+}
+@keyframes fade-in{
+  from{filter: blur(5px);}
+  to{filter: blur(0);}
 }
 </style>
