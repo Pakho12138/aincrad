@@ -97,6 +97,7 @@ module.exports = {
     valineConfig: {
       appId: 'vmCTZevnoxQKw5s8SY3zaWTW-gzGzoHsz',// your appId
       appKey: 'VZ4UKu0rBRhwqf1BaQqW6UXd', // your appKey
+      placeholder: '写下你的评论...'
     },
     heroImages: [
       // 'https://pakhoc.gitee.io/assets/images/bannerBg.png',

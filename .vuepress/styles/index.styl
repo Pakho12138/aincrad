@@ -78,6 +78,7 @@ input:focus {
   }
 }
 
+// 文章标题
 .page .content__default {
   &:not(.custom) {
     h1 {
@@ -120,6 +121,22 @@ input:focus {
 .page .page-title .title {
   font-size: 2rem;
   font-weight: 600;
+}
+
+// 评论
+.comments-wrapper {
+  #valine {
+    --code-color: rgba(238, 238, 238, 0.3);
+
+    .vpanel .vwrap, .vsys, .vat {
+      backdrop-filter: blur(10px) !important;
+    }
+
+    .vcards .vcontent {
+      backdrop-filter: blur(10px) !important;
+      padding: 1rem !important;
+    }
+  }
 }
 
 .sub-sidebar {

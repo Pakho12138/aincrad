@@ -132,5 +132,7 @@ module.exports = [
     // 阅读进度条
     'reading-progress',
     // 小猫goTop
-    'go-top'
+    'go-top',
+    // 图片懒加载
+    'img-lazy'
 ]
