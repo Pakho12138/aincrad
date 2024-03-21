@@ -1,5 +1,6 @@
 ---
 home: true
+permalink: "/"
 heroText: 爱自己，是终生浪漫的开始
 tagline: ['To love oneself is the beginning of a life long romance.']
 # 原来的配置内容
