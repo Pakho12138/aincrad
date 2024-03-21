@@ -1,13 +1,12 @@
 ---
-title: 使用Github Action实现Github自动同步代码到Gitee，并自动部署Gitee Pages
 date: 2023-12-11
 tags:
- - Github Actions
+  - Github Actions
 categories:
- - 前端
+  - 前端
 ---
 
-<!-- # 使用Github Action实现Github自动同步代码到Gitee，并自动部署Gitee Pages -->
+# 使用 Github Action 实现 Github 自动同步代码到 Gitee，并自动部署 Gitee Pages
 
 ## 1. 创建 workflow
 
@@ -64,13 +63,11 @@ jobs:
 
 更多触发事件，请参考 [Events that trigger workflows](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows)
 
-
-
 ## 2. 配置密钥
 
 密钥的配置步骤如下：
 
-a. 在命令行终端或 Git Bash 使用命令 `ssh-keygen -t rsa -C "youremail@example.com"` 生成 SSH Key，注意替换为自己的邮箱。生成的 `id_rsa` 是私钥，`id_rsa.pub` 是公钥。(⚠️注意此处不要设置密码，生成的公私钥用于下面 GitHub / Gitee 的配置，以保证公私钥成对，否则从 GitHub -> Gitee 的同步将会失败。)
+a. 在命令行终端或 Git Bash 使用命令 `ssh-keygen -t rsa -C "youremail@example.com"` 生成 SSH Key，注意替换为自己的邮箱。生成的 `id_rsa` 是私钥，`id_rsa.pub` 是公钥。(⚠️ 注意此处不要设置密码，生成的公私钥用于下面 GitHub / Gitee 的配置，以保证公私钥成对，否则从 GitHub -> Gitee 的同步将会失败。)
 
 b. 在 GitHub 项目的「Settings -> Secrets and variables -> Actions」**Repository secrets**下配置好命名为 `GITEE_PRIVATE_KEY` 和 `GITEE_PASSWORD` 的两个密钥。其中：`GITEE_PRIVATE_KEY` 存放 `id_rsa` 私钥；`GITEE_PASSWORD` 存放 Gitee 帐号的密码。
 
@@ -78,20 +75,14 @@ c. 在 GitHub 的个人设置页面「[Settings -> SSH and GPG keys](https://git
 
 d. 在 Gitee 的个人设置页面「[安全设置 -> SSH 公钥](https://gitee.com/profile/sshkeys)」配置 SSH 公钥（即：`id_rsa.pub`），命名随意。
 
-
-
 ## 3. 关注 Gitee 公众号
 
 关注 Gitee 官方公众号，并绑定个人 Gitee 帐号，用于接收帐号登录通知、以及绕过短信验证码校验，见[错误及解决方案](https://github.com/marketplace/actions/gitee-pages-action#错误及解决方案) 第 3 点。
-
-
 
 ## 4. 运行结果
 
 如果一切配置正常，并成功触发 [Gitee Pages Action](https://github.com/marketplace/actions/gitee-pages-action) ，Gitee Pages Action 会打印出成功的结果。并且，我们会在 Gitee 公众号收到一条登录通知。这是 Gitee Pages Action 程序帮我们登录到 Gitee 官网，并为我们点击了项目的部署按钮。
 
-
 <br/>
 
-**参考文章： [Gitee Pages Action](https://github.com/marketplace/actions/gitee-pages-action)** 
-
+**参考文章： [Gitee Pages Action](https://github.com/marketplace/actions/gitee-pages-action)**

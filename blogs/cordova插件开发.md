@@ -1,29 +1,24 @@
 ---
-title: Cordova插件开发
 date: 2023-12-12
 tags:
- - Cordova
+  - Cordova
 categories:
- - 前端
+  - 前端
 ---
 
-<!-- # Cordova插件开发 -->
+# Cordova 插件开发
 
-## 1. 安装plugman
+## 1. 安装 plugman
 
 ```sh
 npm install plugman -g
 ```
-
-
 
 ## 2. 新建插件
 
 ```sh
 plugman create --name TestPlugin --plugin_id cordova-plugin-testplugin --plugin_version 1.0.0
 ```
-
-
 
 ## 3. 添加平台
 
@@ -32,52 +27,39 @@ cd TestPlugin
 plugman platform add --platform_name android
 ```
 
-
-
-## 4. 初始化package.json
+## 4. 初始化 package.json
 
 ```sh
 npm init
 ```
 
+## 5. 添加到 ionic 项目中
 
-
-## 5. 添加到ionic 项目中
-
-* 查看安装了哪些插件
+- 查看安装了哪些插件
 
   ```sh
   ionic cordova plugin ls
   ```
 
-* 添加插件
+- 添加插件
 
   ```sh
   ionic cordova plugin add G:\app\test\TestPlugin
   ```
 
-* 删除插件
+- 删除插件
 
   ```sh
   ionic cordova plugin remove cordova-plugin-testplugin
   ```
 
+## 6. Android Studio 打开项目中 platform 下 android 工程，编辑 TestPlugin.java
 
+## 7. 编辑 www 文件夹下 TestPlugin.js
 
-## 6. Android Studio打开项目中platform下android工程，编辑TestPlugin.java
+## 8. 编辑 plugin.xml
 
-
-
-## 7. 编辑www文件夹下TestPlugin.js
-
-
-
-## 8. 编辑plugin.xml
-
-
-
-## 9.js调用插件
-
+## 9.js 调用插件
 
 <br/>
 
@@ -88,4 +70,3 @@ npm init
 [画中画](https://github.com/lounai-chen/cordova-plugin-floating-window)
 
 [阿里云文件操作](https://github.com/lounai-chen/cordova-plugins-aliyunOSSupload)
-

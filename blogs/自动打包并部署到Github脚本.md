@@ -1,13 +1,12 @@
 ---
-title: 自动打包并部署到Github脚本
 date: 2023-12-10
 tags:
- - Git
+  - Git
 categories:
- - 前端
+  - 前端
 ---
 
-<!-- # 自动打包并部署到Github脚本 -->
+# 自动打包并部署到 Github 脚本
 
 ```sh
 #!/usr/bin/env sh
@@ -31,4 +30,3 @@ git push -f git@github.com:Pakho12138/Aincrad.git master:gh-pages
 cd -
 
 ```
-

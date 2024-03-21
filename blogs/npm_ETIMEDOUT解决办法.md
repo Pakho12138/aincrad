@@ -1,38 +1,35 @@
 ---
-title: npm install报错ERR code ETIMEDOUT的解决办法
 date: 2023-12-13
 tags:
- - npm
+  - npm
 categories:
- - 前端
+  - 前端
 ---
 
-<!-- # npm install报错ERR code ETIMEDOUT的解决办法 -->
+# npm install 报错 ERR code ETIMEDOUT 的解决办法
 
 将 **npm** 改为 **淘宝镜像**即可
 
-1. 查看npm镜像设置
+1. 查看 npm 镜像设置
 
    ```sh
    npm config get registry
    ```
 
-2. 将npm设置为淘宝镜像
+2. 将 npm 设置为淘宝镜像
 
    ```sh
    npm config set registry https://registry.npm.taobao.org
    ```
 
-3. 再次查看npm镜像设置
+3. 再次查看 npm 镜像设置
 
    ```sh
    npm config get registry
    ```
 
-4. 重新install
+4. 重新 install
 
    ```sh
    npm install
    ```
-
-   
