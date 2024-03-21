@@ -4,10 +4,11 @@ const sidebar = require("./config/sidebar");
 const friendLink = require("./config/friendLink");
 
 module.exports = {
-  base: '/aincrad/',
+  base: '/',
   title: "AINCRAD",
   description: "别让认知束缚自己",
   dest: "public",
+  permalink: "/:slug", // 开启永久路径
   head: [
     [
       'link',

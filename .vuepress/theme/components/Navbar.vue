@@ -66,7 +66,7 @@ export default defineComponent({
   watch: {
     $route: {
       handler(to, from) {
-        if (to.path == '/') {
+        if (to.path == `/${this.instance?.$site?.title?.toLowerCase()}/` || to.path == '/') {
           this.isHome = true;
           this.navbarFixed = false;
           console.log(this.isHome, this.navbarFixed);
@@ -129,7 +129,7 @@ export default defineComponent({
       window.addEventListener('resize', handleLinksWrapWidth, false);
     });
 
-    return { linksWrapMaxWidth, algolia, isAlgoliaSearch, css };
+    return { instance, linksWrapMaxWidth, algolia, isAlgoliaSearch, css };
   },
 });
 </script>
