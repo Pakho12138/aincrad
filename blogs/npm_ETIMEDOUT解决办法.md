@@ -3,7 +3,7 @@ date: 2023-12-13
 tags:
   - npm
 categories:
-  - 前端
+  - 脚本
 ---
 
 # npm install 报错 ERR code ETIMEDOUT 的解决办法

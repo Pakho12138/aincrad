@@ -14,8 +14,8 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.home-blog, .abstract-wrapper, .tags, .info-wrapper, .noxone-music, .NoxoneLive2D {
-  font-family: GLOBAL_FONT;
+.home-blog, .abstract-wrapper, .tags, .info-wrapper, .noxone-music, .NoxoneLive2D, .timeline-content, .iconfont span, .vempty {
+  font-family: GLOBAL_FONT !important;
 }
 
 .search-box {
@@ -640,4 +640,9 @@ input:focus {
   i {
     margin-right: 6px;
   }
+}
+
+// 屏蔽彩带背景点击事件
+#bgCanvas {
+  pointer-events: none;
 }

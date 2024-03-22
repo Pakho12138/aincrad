@@ -97,7 +97,7 @@ module.exports = {
     valineConfig: {
       appId: 'vmCTZevnoxQKw5s8SY3zaWTW-gzGzoHsz',// your appId
       appKey: 'VZ4UKu0rBRhwqf1BaQqW6UXd', // your appKey
-      placeholder: '写下你的评论...'
+      placeholder: '在这片空白之境，让你的思绪如流星划过，留下绚烂的痕迹...'
     },
     heroImages: [
       // 'https://pakhoc.gitee.io/assets/images/bannerBg.png',
