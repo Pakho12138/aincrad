@@ -27,9 +27,8 @@ tagline: ['To love oneself is the beginning of a life long romance.']
 #   borderRadius: '1rem',
 # }
 bgImage: https://pakhoc.gitee.io/assets/images/bannerBg.png
-# bgVideo: https://pakhoc.gitee.io/assets/video/YOASOBI_BiriBiri.mov
 # 使用cdn
-# bgVideo: https://cdnqabankinsurancemedia.qzhanye.com/upload/media/admin_1/20231207/yXETwzFbJQdPGBc8EFJGwcr5f7em8nPi__CTY__BytROBlJQbBBl5IiHwgASgdZVeoZ9gZuOLP9bVYwU6Dc0DQgNUeiL.mp4?auth_key=1703855629-0-0-57e5b3565428447bf08ce211dc7ce44e
+bgVideo: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/video/YOASOBI - BiriBiri Official Music Video.mp4
 # 昼
 # bgVideo: https://cdnqabankinsurancemedia.qzhanye.com/upload/media/admin_1/20231228/tnD2ZhWrMJrNWbQkcrf528NeGcQwFwCH.mp4?auth_key=1703852324-0-0-0b0d902478e6bb7b2bb705428560aa20
 # 夜

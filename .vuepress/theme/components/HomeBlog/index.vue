@@ -2,12 +2,18 @@
   <div class="home-blog">
     <div class="hero">
       <div class="hero-bg" :style="{ ...bgImageStyle }"></div>
-      <video v-if="$frontmatter.bgVideo" class="hero-video" :src="$frontmatter.bgVideo" preload="auto" autoplay muted loop></video>
-      <div>
-        <ModuleTransition>
-          <img class="hero-img" v-if="recoShowModule && $frontmatter.heroImage" :style="heroImageStyle || {}" :src="$withBase($frontmatter.heroImage)" alt="hero" />
-        </ModuleTransition>
 
+      <div class="video-wrapper">
+        <video ref="videoRef" v-if="$frontmatter.bgVideo" v-show="showBgVideo" class="hero-video" :src="$frontmatter.bgVideo" preload="auto" @canplay="videoCanPlay" @play="handleVideoPlay" @pause="handleVideoPause"></video>
+        <div class="video-btn" :class="{ 'video-play': !isPlay, 'video-pause': isPlay }" @click="toggleVideoStatus"></div>
+        <div class="video-stu" :class="{ show: showBgVideo && !isPlay }">{{ !isCanPlay ? '视频加载中...' : '已暂停..'}}.</div>
+      </div>
+
+      <ModuleTransition>
+        <img class="hero-img" v-if="recoShowModule && $frontmatter.heroImage" :style="heroImageStyle || {}" :src="$withBase($frontmatter.heroImage)" alt="hero" />
+      </ModuleTransition>
+
+      <div class="focus-info" :class="{ hide: isPlay }">
         <ModuleTransition delay="0.04">
           <h1 class="hover" v-if="recoShowModule && $frontmatter.heroText !== null">
             {{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}
@@ -22,7 +28,8 @@
           </div>
         </ModuleTransition>
       </div>
-      <component v-if="bubbles" :is="bubbles" :options="options"></component>
+
+      <component v-if="bubbles && !isPlay" :is="bubbles" :options="options"></component>
     </div>
 
     <ModuleTransition delay="0.16">
@@ -77,6 +84,9 @@ export default defineComponent({
       tags: [],
       bubbles: null,
       options: null,
+      showBgVideo: false,
+      isCanPlay: false,
+      isPlay: false,
     };
   },
   setup(props, ctx) {
@@ -177,6 +187,25 @@ export default defineComponent({
       const windowH = document.getElementsByClassName('hero')[0].clientHeight - 58; // 获取窗口高度
       document.documentElement.scrollTop = windowH; // 滚动条滚动到指定位置
     },
+    videoCanPlay(){
+      this.isCanPlay = true;
+    },
+    toggleVideoStatus() {
+      if (this.isPlay) {
+        this.$refs.videoRef.pause();
+      } else {
+        this.$refs.videoRef.play();
+        if (!this.showBgVideo) {
+          this.showBgVideo = true;
+        }
+      }
+    },
+    handleVideoPlay() {
+      this.isPlay = true;
+    },
+    handleVideoPause() {
+      this.isPlay = false;
+    },
   },
 });
 </script>
@@ -204,17 +233,73 @@ export default defineComponent({
       animation zoom-in 10s linear forwards, fade-in 2.5s linear forwards
     }
 
-    .hero-video{
+    .video-wrapper{
       position absolute
-      width 100%
-      height 100%
-      object-fit cover
-      object-position center
+      top 0
+      bottom 0
+      left 0
+      right 0
+
+      .hero-video {
+        width 100%
+        height 100%
+        object-fit cover
+        object-position center
+        pointer-events none
+      }
+
+      .video-btn {
+        position: absolute;
+        bottom: 3px;
+        right: 5px;
+        width: 32px;
+        height: 32px;
+        z-index: 7;
+        background-position: center;
+        background-size: cover;
+        cursor: pointer;
+        opacity: .8;
+        animation: poi-face 10s linear infinite alternate;
+        &.video-play {
+          background: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202403221729599.png);
+        }
+        &.video-pause {
+          background: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202403221738731.png);
+        }
+      }
+
+      .video-stu{
+        position: absolute;
+        bottom: -100px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        padding: 6px 15px;
+        text-align: center;
+        color: #fff;
+        width: 100%;
+        background-color: rgba(0, 0, 0, .8);
+        border-radius: 0;
+        font-size: 18px;
+        z-index: 1;
+        transition: .4s ease all;
+        &.show{
+          bottom: 0;
+        }
+      }
     }
 
     .hero-img {
       max-width: 300px;
       margin: 0 auto 1.5rem
+    }
+
+    .focus-info {
+      z-index 1
+      transition: .4s ease all;
+      &.hide{
+        transform: translateY(-999px);
+      }
     }
 
     h1 {
@@ -400,6 +485,7 @@ export default defineComponent({
   bottom: 30%;
   margin-left: -15px;
   cursor: pointer;
+  z-index 1
 }
 @-webkit-keyframes bounce-in{
   0%{transform:translateY(0); opacity: 1}
@@ -436,5 +522,201 @@ export default defineComponent({
 @keyframes fade-in{
   from{filter: blur(5px);}
   to{filter: blur(0);}
+}
+
+@-webkit-keyframes poi-face {
+    2%,24%,80% {
+      transform: translate(0,1.5px) rotate(1.5deg)
+    }
+
+    4%,68%,98% {
+      transform: translate(0,-1.5px) rotate(-.5deg)
+    }
+
+    38%,6% {
+      transform: translate(0,1.5px) rotate(-1.5deg)
+    }
+
+    8%,86% {
+      transform: translate(0,-1.5px) rotate(-1.5deg)
+    }
+
+    10%,72% {
+      transform: translate(0,2.5px) rotate(1.5deg)
+    }
+
+    12%,64%,78%,96% {
+      transform: translate(0,-.5px) rotate(1.5deg)
+    }
+
+    14%,54% {
+      transform: translate(0,-1.5px) rotate(1.5deg)
+    }
+
+    16% {
+      transform: translate(0,-.5px) rotate(-1.5deg)
+    }
+
+    18%,22% {
+      transform: translate(0,.5px) rotate(-1.5deg)
+    }
+
+    20%,36%,46% {
+      transform: translate(0,-1.5px) rotate(2.5deg)
+    }
+
+    26%,50% {
+      transform: translate(0,.5px) rotate(.5deg)
+    }
+
+    28% {
+      transform: translate(0,.5px) rotate(1.5deg)
+    }
+
+    30%,40%,62%,76%,88% {
+      transform: translate(0,-.5px) rotate(2.5deg)
+    }
+
+    32%,34%,66% {
+      transform: translate(0,1.5px) rotate(-.5deg)
+    }
+
+    42% {
+      transform: translate(0,2.5px) rotate(-1.5deg)
+    }
+
+    44%,70% {
+      transform: translate(0,1.5px) rotate(.5deg)
+    }
+
+    48%,74%,82% {
+      transform: translate(0,-.5px) rotate(.5deg)
+    }
+
+    52%,56%,60% {
+      transform: translate(0,2.5px) rotate(2.5deg)
+    }
+
+    58% {
+      transform: translate(0,.5px) rotate(2.5deg)
+    }
+
+    84% {
+      transform: translate(0,1.5px) rotate(2.5deg)
+    }
+
+    90% {
+      transform: translate(0,2.5px) rotate(-.5deg)
+    }
+
+    92% {
+      transform: translate(0,.5px) rotate(-.5deg)
+    }
+
+    94% {
+      transform: translate(0,2.5px) rotate(.5deg)
+    }
+
+    0%,100% {
+      transform: translate(0,0) rotate(0)
+    }
+}
+
+@keyframes poi-face {
+    2%,24%,80% {
+      transform: translate(0,1.5px) rotate(1.5deg)
+    }
+
+    4%,68%,98% {
+      transform: translate(0,-1.5px) rotate(-.5deg)
+    }
+
+    38%,6% {
+      transform: translate(0,1.5px) rotate(-1.5deg)
+    }
+
+    8%,86% {
+      transform: translate(0,-1.5px) rotate(-1.5deg)
+    }
+
+    10%,72% {
+      transform: translate(0,2.5px) rotate(1.5deg)
+    }
+
+    12%,64%,78%,96% {
+      transform: translate(0,-.5px) rotate(1.5deg)
+    }
+
+    14%,54% {
+      transform: translate(0,-1.5px) rotate(1.5deg)
+    }
+
+    16% {
+      transform: translate(0,-.5px) rotate(-1.5deg)
+    }
+
+    18%,22% {
+      transform: translate(0,.5px) rotate(-1.5deg)
+    }
+
+    20%,36%,46% {
+      transform: translate(0,-1.5px) rotate(2.5deg)
+    }
+
+    26%,50% {
+      transform: translate(0,.5px) rotate(.5deg)
+    }
+
+    28% {
+      transform: translate(0,.5px) rotate(1.5deg)
+    }
+
+    30%,40%,62%,76%,88% {
+      transform: translate(0,-.5px) rotate(2.5deg)
+    }
+
+    32%,34%,66% {
+      transform: translate(0,1.5px) rotate(-.5deg)
+    }
+
+    42% {
+      transform: translate(0,2.5px) rotate(-1.5deg)
+    }
+
+    44%,70% {
+      transform: translate(0,1.5px) rotate(.5deg)
+    }
+
+    48%,74%,82% {
+      transform: translate(0,-.5px) rotate(.5deg)
+    }
+
+    52%,56%,60% {
+      transform: translate(0,2.5px) rotate(2.5deg)
+    }
+
+    58% {
+      transform: translate(0,.5px) rotate(2.5deg)
+    }
+
+    84% {
+      transform: translate(0,1.5px) rotate(2.5deg)
+    }
+
+    90% {
+      transform: translate(0,2.5px) rotate(-.5deg)
+    }
+
+    92% {
+      transform: translate(0,.5px) rotate(-.5deg)
+    }
+
+    94% {
+      transform: translate(0,2.5px) rotate(.5deg)
+    }
+
+    0%,100% {
+      transform: translate(0,0) rotate(0)
+    }
 }
 </style>

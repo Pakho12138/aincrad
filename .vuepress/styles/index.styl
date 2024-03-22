@@ -379,6 +379,18 @@ input:focus {
     font-family: GLOBAL_FONT !important;
     margin: 0 !important;
 
+    &::after{
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      background-attachment: fixed;
+      background-image: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202403221639795.gif);
+    }
+
     h1, .description {
       color: #fff;
       text-shadow: -2px 0 #666, 2px 0 #666, 0 2px #666, 0 -2px #666;
@@ -388,6 +400,10 @@ input:focus {
       text-shadow: -1px 0 #666, 1px 0 #666, 0 1px #666, 0 -1px #666 !important;
       font-weight: 600;
       color: #fff !important;
+    }
+
+    canvas {
+      pointer-events: none;
     }
   }
 
