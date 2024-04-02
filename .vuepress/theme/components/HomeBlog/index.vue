@@ -4,9 +4,23 @@
       <div class="hero-bg" :style="{ ...bgImageStyle }"></div>
 
       <div class="video-wrapper">
-        <video ref="videoRef" v-if="$frontmatter.bgVideo" v-show="showBgVideo" class="hero-video" :src="$frontmatter.bgVideo" preload="auto" @canplay="videoCanPlay" @play="handleVideoPlay" @pause="handleVideoPause"></video>
+        <video
+          ref="videoRef"
+          v-if="$frontmatter.bgVideo && showBgVideo"
+          class="hero-video"
+          :src="$frontmatter.bgVideo"
+          preload="auto"
+          @canplay="videoCanPlay"
+          @waiting="handleVideoWaiting"
+          @playing="handleVideoPlay"
+          @pause="handleVideoPause"></video>
         <div class="video-btn" :class="{ 'video-play': !isPlay, 'video-pause': isPlay }" @click="toggleVideoStatus"></div>
-        <div class="video-stu" :class="{ show: showBgVideo && !isPlay }">{{ !isCanPlay ? '视频加载中...' : '已暂停..'}}.</div>
+        <div v-if="showBgVideo" class="video-btn video-close" @click="closeBgVideo"></div>
+        <div class="video-stu" :class="{ show: showBgVideo && (!isCanPlay || !isPlay) }">
+          <span v-if="isCanPlay && !isPlay">已暂停...</span>
+          <span v-if="!isPlay && !isCanPlay">视频加载中...</span>
+          <span v-if="isPlay && !isCanPlay">缓冲中...</span>
+        </div>
       </div>
 
       <ModuleTransition>
@@ -187,23 +201,33 @@ export default defineComponent({
       const windowH = document.getElementsByClassName('hero')[0].clientHeight - 58; // 获取窗口高度
       document.documentElement.scrollTop = windowH; // 滚动条滚动到指定位置
     },
-    videoCanPlay(){
+    videoCanPlay() {
       this.isCanPlay = true;
     },
     toggleVideoStatus() {
       if (this.isPlay) {
         this.$refs.videoRef.pause();
       } else {
-        this.$refs.videoRef.play();
         if (!this.showBgVideo) {
           this.showBgVideo = true;
         }
+        this.$nextTick(() => {
+          this.$refs.videoRef.play();
+        });
       }
     },
     handleVideoPlay() {
       this.isPlay = true;
     },
     handleVideoPause() {
+      this.isPlay = false;
+    },
+    handleVideoWaiting() {
+      console.log('waiting');
+      this.isCanPlay = false;
+    },
+    closeBgVideo() {
+      this.showBgVideo = false;
       this.isPlay = false;
     },
   },
@@ -260,11 +284,18 @@ export default defineComponent({
         cursor: pointer;
         opacity: .8;
         animation: poi-face 10s linear infinite alternate;
+        &:hover {
+          opacity: 1;
+        }
         &.video-play {
           background: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202403221729599.png);
         }
         &.video-pause {
           background: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202403221738731.png);
+        }
+        &.video-close {
+          background: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404021915780.png);
+          left: 5px;
         }
       }
 
@@ -276,12 +307,11 @@ export default defineComponent({
         margin: auto;
         padding: 6px 15px;
         text-align: center;
-        color: #fff;
+        color: #666;
         width: 100%;
-        background-color: rgba(0, 0, 0, .8);
+        background-color: rgba(255, 255, 255, .8);
         border-radius: 0;
         font-size: 18px;
-        z-index: 1;
         transition: .4s ease all;
         &.show{
           bottom: 0;
