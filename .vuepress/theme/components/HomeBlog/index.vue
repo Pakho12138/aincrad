@@ -10,16 +10,17 @@
           class="hero-video"
           :src="$frontmatter.bgVideo"
           preload="auto"
+          @loadedmetadata="loadedMetaData"
           @canplay="videoCanPlay"
           @waiting="handleVideoWaiting"
           @playing="handleVideoPlay"
           @pause="handleVideoPause"></video>
         <div class="video-btn" :class="{ 'video-play': !isPlay, 'video-pause': isPlay }" @click="toggleVideoStatus"></div>
         <div v-if="showBgVideo" class="video-btn video-close" @click="closeBgVideo"></div>
-        <div class="video-stu" :class="{ show: showBgVideo && (!isCanPlay || !isPlay) }">
-          <span v-if="isCanPlay && !isPlay">已暂停...</span>
-          <span v-if="!isPlay && !isCanPlay">视频加载中...</span>
-          <span v-if="isPlay && !isCanPlay">缓冲中...</span>
+        <div class="video-stu" :class="{ show: showBgVideo && (!isVideoInit || !isCanPlay || !isPlay) }">
+          <span v-if="!isVideoInit">视频加载中...</span>
+          <span v-if="isVideoInit && !isPlay">已暂停...</span>
+          <span v-if="isVideoInit && isPlay && !isCanPlay">缓冲中...</span>
         </div>
       </div>
 
@@ -99,6 +100,7 @@ export default defineComponent({
       bubbles: null,
       options: null,
       showBgVideo: false,
+      isVideoInit: false,
       isCanPlay: false,
       isPlay: false,
     };
@@ -216,6 +218,9 @@ export default defineComponent({
         });
       }
     },
+    loadedMetaData() {
+      this.isVideoInit = true;
+    },
     handleVideoPlay() {
       this.isPlay = true;
     },
@@ -228,6 +233,7 @@ export default defineComponent({
     },
     closeBgVideo() {
       this.showBgVideo = false;
+      this.isVideoInit = false;
       this.isPlay = false;
     },
   },
@@ -294,7 +300,7 @@ export default defineComponent({
           background: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202403221738731.png);
         }
         &.video-close {
-          background: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404021915780.png);
+          background: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404030926646.png);
           left: 5px;
         }
       }
