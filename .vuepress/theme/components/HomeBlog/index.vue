@@ -3,6 +3,8 @@
     <div class="hero">
       <div class="hero-bg" :style="{ ...bgImageStyle }"></div>
 
+      <span class="anchor-down" @click="scrollFn"></span>
+      
       <div class="video-wrapper">
         <video
           ref="videoRef"
@@ -159,7 +161,7 @@ export default defineComponent({
         backDelay: 1500,
         backSpeed: 25,
         cursorChar: ' __',
-        loop: true,
+        loop: false,
       });
     });
 
@@ -175,19 +177,6 @@ export default defineComponent({
       this.bubbles = module.default;
     });
     this.recoShow = true;
-
-    // 添加向下滚动箭头
-    const ifJanchor = document.getElementById('JanchorDown');
-    ifJanchor && ifJanchor.parentNode.removeChild(ifJanchor);
-    let a = document.createElement('a');
-    a.id = 'JanchorDown';
-    a.className = 'anchor-down';
-    document.getElementsByClassName('hero')[0].append(a);
-    let targetA = document.getElementById('JanchorDown');
-    targetA.addEventListener('click', e => {
-      // 添加点击事件
-      this.scrollFn();
-    });
   },
 
   methods: {
@@ -509,7 +498,6 @@ export default defineComponent({
 /* -------------添加向下滚动箭头------------- */
 .anchor-down {
   display: block;
-  margin: 12rem auto 0;
   bottom: 45px;
   width: 30px;
   height: 30px;
@@ -518,10 +506,21 @@ export default defineComponent({
   animation: bounce-in 3.5s infinite;
   position: absolute;
   left: 50%;
-  bottom: 30%;
+  bottom: 10%;
   margin-left: -15px;
   cursor: pointer;
   z-index 1
+  &::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    display: block;
+    border-right: 7px solid #fff;
+    border-top: 7px solid #fff;
+    transform: rotate(135deg) skew(10deg, 10deg);
+    position: absolute;
+    bottom: 10px;
+  }
 }
 @-webkit-keyframes bounce-in{
   0%{transform:translateY(0); opacity: 1}
@@ -532,17 +531,6 @@ export default defineComponent({
   0%{transform:translateY(0); opacity: 1}
   50%{transform:translateY(-20px); opacity: 0.5}
   to{transform:translateY(0); opacity: 1}
-}
-.anchor-down::before {
-  content: "";
-  width: 30px;
-  height: 30px;
-  display: block;
-  border-right: 4px solid #fff;
-  border-top: 4px solid #fff;
-  transform: rotate(135deg);
-  position: absolute;
-  bottom: 10px;
 }
 
 @-webkit-keyframes zoom-in{

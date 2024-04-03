@@ -1,7 +1,7 @@
 <template>
   <div class="kanbanniang">
     <div class="banniang-container" v-show="isLoaded">
-      <div class="messageBox" :style="messageStyle" v-show="isShowMessageBox">
+      <div class="messageBox" :style="messageStyle" :class="{'show': isShowMessageBox}">
         {{ messages.message || '欢迎来到 ' + $site.title }}
       </div>
       <div
@@ -24,6 +24,9 @@
         :width="style.width"
         :height="style.height"
         class="live2d"
+        @mouseenter="showHoverTips"
+        @mouseleave="handleMouseLeave"
+        @click="handleMouseClick"
       ></canvas>
     </div>
     <div class="showBanNiang" v-show="displayBanNiang" @click="showBanNiang">
@@ -40,14 +43,16 @@ export default {
     return {
       isLoaded: true,
       displayBanNiang: false,
-      isShowMessageBox: false,
+      isShowMessageBox: true,
       isShowBtns: CLEAN,
       messages: {
         message: MESSAGES.welcome,
         welcome: MESSAGES.welcome,
         home: MESSAGES.home,
         theme: MESSAGES.theme,
-        close: MESSAGES.close
+        close: MESSAGES.close,
+        hoverTips: MESSAGES.hoverTips,
+        clickTips: MESSAGES.clickTips
       },
       currentTheme: THEME[0],
       myTheme: THEME,
@@ -91,7 +96,8 @@ export default {
       // messageBox的样式
       messageStyle: MESSAGE_STYLE,
       // 按钮的样式
-      btnStyle: BTN_STYLE
+      btnStyle: BTN_STYLE,
+      timer: null
     }
   },
   mounted () {
@@ -134,6 +140,20 @@ export default {
       this.currentTheme = themes[randomNum]
       this.initBanNiang()
     },
+    handleMouseClick () {
+      this.messages.message = this.messages.clickTips[Math.floor(Math.random() * this.messages.clickTips.length)]
+      this.isShowMessageBox = true
+    },
+    showHoverTips () {
+      this.messages.message = this.messages.hoverTips[Math.floor(Math.random() * this.messages.hoverTips.length)]
+      this.isShowMessageBox = true
+    },
+    handleMouseLeave () {
+      this.timer && clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.isShowMessageBox = false
+      }, 3000);
+    },
     closeBanNiang () {
       this.isLoaded = false
       this.displayBanNiang = true
@@ -149,7 +169,10 @@ export default {
         document.querySelector('.kanbanniang').style.display = 'none'
         return
       }
-      const isMobile = !!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      // const isMobile = !!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      //   navigator.userAgent
+      // )
+      const isMobile = !!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
       )
       if (isMobile) {
@@ -202,14 +225,40 @@ export default {
     bottom 100px
     color #00adb5
     .messageBox
-      position fixed
-      padding 10px
-      height 60px
-      width 160px
-      border-radius 8px
-      background-color lighten($accentColor, 50%)
-      color $textColor
-      opacity 0.8
+      position: fixed;
+      bottom: 290px;
+      right: 68px;
+      width: 250px;
+      height: auto;
+      min-height: 70px;
+      margin: -20px 20px;
+      padding: 6px 10px;
+      border-radius: 12px;
+      box-sizing: border-box;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 2px 0px, rgba(0, 0, 0, 0.24) 0px 2px 2px 0px;
+      transition: all 0.2s ease 0s;
+      background: rgb(255, 255, 255);
+      color: rgb(33, 33, 33);
+      font-size: 14px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      animation-delay: 5s;
+      animation-duration: 50s;
+      animation-iteration-count: infinite;
+      animation-name: shake;
+      animation-timing-function: ease-in-out;
+      opacity: 0;
+      // position fixed
+      // padding 10px
+      // height 60px
+      // width 160px
+      // border-radius 8px
+      // background-color lighten($accentColor, 50%)
+      // color $textColor
+      // opacity 0.8
+      &.show{
+        opacity: 1;
+      }
     .operation
       width 20px
       position fixed
@@ -224,6 +273,411 @@ export default {
           color lighten($accentColor, 50%)
     #banniang
       z-index 99999
-      pointer-events none
+      // pointer-events none
       position fixed
+
+
+@-webkit-keyframes shake {
+  2% {
+      transform: translate(.5px,-1.5px) rotate(-.5deg)
+  }
+
+  4% {
+      transform: translate(.5px,1.5px) rotate(1.5deg)
+  }
+
+  6% {
+      transform: translate(1.5px,1.5px) rotate(1.5deg)
+  }
+
+  8% {
+      transform: translate(2.5px,1.5px) rotate(.5deg)
+  }
+
+  10% {
+      transform: translate(.5px,2.5px) rotate(.5deg)
+  }
+
+  12% {
+      transform: translate(1.5px,1.5px) rotate(.5deg)
+  }
+
+  14% {
+      transform: translate(.5px,.5px) rotate(.5deg)
+  }
+
+  16% {
+      transform: translate(-1.5px,-.5px) rotate(1.5deg)
+  }
+
+  18% {
+      transform: translate(.5px,.5px) rotate(1.5deg)
+  }
+
+  20% {
+      transform: translate(2.5px,2.5px) rotate(1.5deg)
+  }
+
+  22% {
+      transform: translate(.5px,-1.5px) rotate(1.5deg)
+  }
+
+  24% {
+      transform: translate(-1.5px,1.5px) rotate(-.5deg)
+  }
+
+  26% {
+      transform: translate(1.5px,.5px) rotate(1.5deg)
+  }
+
+  28% {
+      transform: translate(-.5px,-.5px) rotate(-.5deg)
+  }
+
+  30% {
+      transform: translate(1.5px,-.5px) rotate(-.5deg)
+  }
+
+  32% {
+      transform: translate(2.5px,-1.5px) rotate(1.5deg)
+  }
+
+  34% {
+      transform: translate(2.5px,2.5px) rotate(-.5deg)
+  }
+
+  36% {
+      transform: translate(.5px,-1.5px) rotate(.5deg)
+  }
+
+  38% {
+      transform: translate(2.5px,-.5px) rotate(-.5deg)
+  }
+
+  40% {
+      transform: translate(-.5px,2.5px) rotate(.5deg)
+  }
+
+  42% {
+      transform: translate(-1.5px,2.5px) rotate(.5deg)
+  }
+
+  44% {
+      transform: translate(-1.5px,1.5px) rotate(.5deg)
+  }
+
+  46% {
+      transform: translate(1.5px,-.5px) rotate(-.5deg)
+  }
+
+  48% {
+      transform: translate(2.5px,-.5px) rotate(.5deg)
+  }
+
+  50% {
+      transform: translate(-1.5px,1.5px) rotate(.5deg)
+  }
+
+  52% {
+      transform: translate(-.5px,1.5px) rotate(.5deg)
+  }
+
+  54% {
+      transform: translate(-1.5px,1.5px) rotate(.5deg)
+  }
+
+  56% {
+      transform: translate(.5px,2.5px) rotate(1.5deg)
+  }
+
+  58% {
+      transform: translate(2.5px,2.5px) rotate(.5deg)
+  }
+
+  60% {
+      transform: translate(2.5px,-1.5px) rotate(1.5deg)
+  }
+
+  62% {
+      transform: translate(-1.5px,.5px) rotate(1.5deg)
+  }
+
+  64% {
+      transform: translate(-1.5px,1.5px) rotate(1.5deg)
+  }
+
+  66% {
+      transform: translate(.5px,2.5px) rotate(1.5deg)
+  }
+
+  68% {
+      transform: translate(2.5px,-1.5px) rotate(1.5deg)
+  }
+
+  70% {
+      transform: translate(2.5px,2.5px) rotate(.5deg)
+  }
+
+  72% {
+      transform: translate(-.5px,-1.5px) rotate(1.5deg)
+  }
+
+  74% {
+      transform: translate(-1.5px,2.5px) rotate(1.5deg)
+  }
+
+  76% {
+      transform: translate(-1.5px,2.5px) rotate(1.5deg)
+  }
+
+  78% {
+      transform: translate(-1.5px,2.5px) rotate(.5deg)
+  }
+
+  80% {
+      transform: translate(-1.5px,.5px) rotate(-.5deg)
+  }
+
+  82% {
+      transform: translate(-1.5px,.5px) rotate(-.5deg)
+  }
+
+  84% {
+      transform: translate(-.5px,.5px) rotate(1.5deg)
+  }
+
+  86% {
+      transform: translate(2.5px,1.5px) rotate(.5deg)
+  }
+
+  88% {
+      transform: translate(-1.5px,.5px) rotate(1.5deg)
+  }
+
+  90% {
+      transform: translate(-1.5px,-.5px) rotate(-.5deg)
+  }
+
+  92% {
+      transform: translate(-1.5px,-1.5px) rotate(1.5deg)
+  }
+
+  94% {
+      transform: translate(.5px,.5px) rotate(-.5deg)
+  }
+
+  96% {
+      transform: translate(2.5px,-.5px) rotate(-.5deg)
+  }
+
+  98% {
+      transform: translate(-1.5px,-1.5px) rotate(-.5deg)
+  }
+
+  0%,100% {
+      transform: translate(0,0) rotate(0)
+  }
+}
+
+@keyframes shake {
+  2% {
+      transform: translate(.5px,-1.5px) rotate(-.5deg)
+  }
+
+  4% {
+      transform: translate(.5px,1.5px) rotate(1.5deg)
+  }
+
+  6% {
+      transform: translate(1.5px,1.5px) rotate(1.5deg)
+  }
+
+  8% {
+      transform: translate(2.5px,1.5px) rotate(.5deg)
+  }
+
+  10% {
+      transform: translate(.5px,2.5px) rotate(.5deg)
+  }
+
+  12% {
+      transform: translate(1.5px,1.5px) rotate(.5deg)
+  }
+
+  14% {
+      transform: translate(.5px,.5px) rotate(.5deg)
+  }
+
+  16% {
+      transform: translate(-1.5px,-.5px) rotate(1.5deg)
+  }
+
+  18% {
+      transform: translate(.5px,.5px) rotate(1.5deg)
+  }
+
+  20% {
+      transform: translate(2.5px,2.5px) rotate(1.5deg)
+  }
+
+  22% {
+      transform: translate(.5px,-1.5px) rotate(1.5deg)
+  }
+
+  24% {
+      transform: translate(-1.5px,1.5px) rotate(-.5deg)
+  }
+
+  26% {
+      transform: translate(1.5px,.5px) rotate(1.5deg)
+  }
+
+  28% {
+      transform: translate(-.5px,-.5px) rotate(-.5deg)
+  }
+
+  30% {
+      transform: translate(1.5px,-.5px) rotate(-.5deg)
+  }
+
+  32% {
+      transform: translate(2.5px,-1.5px) rotate(1.5deg)
+  }
+
+  34% {
+      transform: translate(2.5px,2.5px) rotate(-.5deg)
+  }
+
+  36% {
+      transform: translate(.5px,-1.5px) rotate(.5deg)
+  }
+
+  38% {
+      transform: translate(2.5px,-.5px) rotate(-.5deg)
+  }
+
+  40% {
+      transform: translate(-.5px,2.5px) rotate(.5deg)
+  }
+
+  42% {
+      transform: translate(-1.5px,2.5px) rotate(.5deg)
+  }
+
+  44% {
+      transform: translate(-1.5px,1.5px) rotate(.5deg)
+  }
+
+  46% {
+      transform: translate(1.5px,-.5px) rotate(-.5deg)
+  }
+
+  48% {
+      transform: translate(2.5px,-.5px) rotate(.5deg)
+  }
+
+  50% {
+      transform: translate(-1.5px,1.5px) rotate(.5deg)
+  }
+
+  52% {
+      transform: translate(-.5px,1.5px) rotate(.5deg)
+  }
+
+  54% {
+      transform: translate(-1.5px,1.5px) rotate(.5deg)
+  }
+
+  56% {
+      transform: translate(.5px,2.5px) rotate(1.5deg)
+  }
+
+  58% {
+      transform: translate(2.5px,2.5px) rotate(.5deg)
+  }
+
+  60% {
+      transform: translate(2.5px,-1.5px) rotate(1.5deg)
+  }
+
+  62% {
+      transform: translate(-1.5px,.5px) rotate(1.5deg)
+  }
+
+  64% {
+      transform: translate(-1.5px,1.5px) rotate(1.5deg)
+  }
+
+  66% {
+      transform: translate(.5px,2.5px) rotate(1.5deg)
+  }
+
+  68% {
+      transform: translate(2.5px,-1.5px) rotate(1.5deg)
+  }
+
+  70% {
+      transform: translate(2.5px,2.5px) rotate(.5deg)
+  }
+
+  72% {
+      transform: translate(-.5px,-1.5px) rotate(1.5deg)
+  }
+
+  74% {
+      transform: translate(-1.5px,2.5px) rotate(1.5deg)
+  }
+
+  76% {
+      transform: translate(-1.5px,2.5px) rotate(1.5deg)
+  }
+
+  78% {
+      transform: translate(-1.5px,2.5px) rotate(.5deg)
+  }
+
+  80% {
+      transform: translate(-1.5px,.5px) rotate(-.5deg)
+  }
+
+  82% {
+      transform: translate(-1.5px,.5px) rotate(-.5deg)
+  }
+
+  84% {
+      transform: translate(-.5px,.5px) rotate(1.5deg)
+  }
+
+  86% {
+      transform: translate(2.5px,1.5px) rotate(.5deg)
+  }
+
+  88% {
+      transform: translate(-1.5px,.5px) rotate(1.5deg)
+  }
+
+  90% {
+      transform: translate(-1.5px,-.5px) rotate(-.5deg)
+  }
+
+  92% {
+      transform: translate(-1.5px,-1.5px) rotate(1.5deg)
+  }
+
+  94% {
+      transform: translate(.5px,.5px) rotate(-.5deg)
+  }
+
+  96% {
+      transform: translate(2.5px,-.5px) rotate(-.5deg)
+  }
+
+  98% {
+      transform: translate(-1.5px,-1.5px) rotate(-.5deg)
+  }
+
+  0%,100% {
+      transform: translate(0,0) rotate(0)
+  }
+}
 </style>

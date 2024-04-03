@@ -10,7 +10,9 @@ module.exports = (options, context) => ({
         welcome: '',
         home: '心里的花，我想要带你回家。',
         theme: '好吧，希望你能喜欢我的其他小伙伴。',
-        close: '你知道我喜欢吃什么吗？痴痴地望着你。'
+        close: '你知道我喜欢吃什么吗？痴痴地望着你。',
+        hoverTips: ['心里的花，我想要带你回家。'],
+        clickTips: ['嗷呜~']
       },
       MESSAGE_STYLE: messageStyle || {
         right: '68px',
@@ -19,7 +21,7 @@ module.exports = (options, context) => ({
       MODEL_STYLE: modelStyle || {
         right: '90px',
         bottom: '-20px',
-        opacity: '0.9'
+        opacity: '1'
       },
       BTN_STYLE: btnStyle || {
         right: '90px',
