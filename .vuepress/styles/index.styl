@@ -424,7 +424,11 @@ input:focus {
           }
 
           .abstract {
-            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            margin: 12px 0;
 
             h1 {
               display: none;

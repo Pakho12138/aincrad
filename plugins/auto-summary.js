@@ -35,10 +35,10 @@ module.exports = (options, context) => ({
 
         // 提取摘要逻辑
         // 例如: 取前 200 个字符作为摘要
-        const summary = textContent.slice(0, 200) + '...';
+        const summary = textContent.slice(0, 200);
 
         if (summary) {
-            $page.summary = summary;
+            $page.excerpt = summary;
         }
     }
 });
