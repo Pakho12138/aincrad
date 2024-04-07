@@ -53,9 +53,9 @@ module.exports = [
             ],
             clean: true,
             messages: {
-                welcome: '欢迎来到我的博客', 
-                home: '心里的花，我想要带你回家。', 
-                theme: '好吧，希望你能喜欢我的其他小伙伴。', 
+                welcome: '欢迎来到我的博客',
+                home: '心里的花，我想要带你回家。',
+                theme: '好吧，希望你能喜欢我的其他小伙伴。',
                 close: '你不喜欢我了吗？痴痴地望着你。',
                 hoverTips: ['心里的花，我想要带你回家', '汪，汪汪~', ' (*･´ω`･)っ'],
                 clickTips: ['嗷呜~', 'o(*￣▽￣*)o'],
@@ -139,5 +139,7 @@ module.exports = [
     // 小猫goTop
     'go-top',
     // 图片懒加载
-    'img-lazy'
+    'img-lazy',
+    // 获取摘要和图片（自定义插件）
+    'plugins/auto-summary',
 ]
