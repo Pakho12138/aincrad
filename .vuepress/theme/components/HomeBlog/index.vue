@@ -342,7 +342,7 @@ export default defineComponent({
   .home-blog-wrapper {
     display flex
     align-items: flex-start;
-    margin 20px auto 0
+    margin 40px auto 0
     padding 0 20px
     max-width $homePageWidth
     .blog-list {
@@ -360,7 +360,7 @@ export default defineComponent({
       top 70px
       overflow hidden
       transition all .3s
-      margin-left 15px
+      margin-left 30px
       flex 0 0 300px
       height auto
       box-shadow var(--box-shadow)

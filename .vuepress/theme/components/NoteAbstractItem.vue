@@ -1,36 +1,37 @@
 <template>
-  <div
-    class="abstract-item"
-    @click="$router.push(item.path)">
+  <div class="abstract-item" @click="$router.push(item.path)">
     <reco-icon v-if="item.frontmatter.sticky" icon="reco-sticky" />
-    <div class="title">
-      <reco-icon v-if="item.frontmatter.keys" icon="reco-lock" />
-      <router-link :to="item.path">{{item.title}}</router-link>
+    <div class="info-detail">
+      <div class="title">
+        <reco-icon v-if="item.frontmatter.keys" icon="reco-lock" />
+        <router-link :to="item.path">{{ item.title }}</router-link>
+      </div>
+      <PageInfo :pageInfo="item" :currentTag="currentTag" style="margin: 12px 0; --text-color-sub: #999;"> </PageInfo>
+      <div class="abstract" v-html="item.excerpt"></div>
     </div>
-    <div class="abstract" v-html="item.excerpt"></div>
-    <PageInfo
-      :pageInfo="item"
-      :currentTag="currentTag">
-    </PageInfo>
+    <div class="thumbnail-wrapper">
+      <img class="thumbnail" :src="item.firstImage || 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/child-1024x576.jpg'" />
+    </div>
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { RecoIcon } from '@vuepress-reco/core/lib/components'
-import PageInfo from './PageInfo'
+import { defineComponent } from 'vue';
+import { RecoIcon } from '@vuepress-reco/core/lib/components';
+import PageInfo from './PageInfo';
 export default defineComponent({
   components: { PageInfo, RecoIcon },
-  props: ['item', 'currentPage', 'currentTag']
-})
+  props: ['item', 'currentPage', 'currentTag'],
+});
 </script>
 
 <style lang="stylus" scoped>
 .abstract-item
+  display flex
   position relative
-  margin: 0 auto 20px;
-  padding: 16px 20px;
+  margin: 0 auto 40px;
   width 100%
+  height 300px
   overflow: hidden;
   border-radius: $borderRadius
   box-shadow: var(--box-shadow);
@@ -41,6 +42,10 @@ export default defineComponent({
   > * {
     pointer-events: auto;
   }
+  &:nth-child(2n)
+    flex-direction row-reverse
+  &:hover .thumbnail
+    transform scale(1.2) rotate(5deg)
   .reco-sticky
     position absolute
     top 0
@@ -50,11 +55,24 @@ export default defineComponent({
     font-size 2.4rem
   &:hover
     box-shadow: var(--box-shadow-hover)
-  .title
-    position: relative;
-    font-size: 1.28rem;
-    line-height: 46px;
-    display: inline-block;
+  .thumbnail-wrapper
+    width 55%
+    overflow hidden
+    .thumbnail
+      width 100%
+      height 100%
+      object-fit cover
+      object-position center
+      transition all .6s
+  .info-detail
+    flex 1
+    overflow hidden
+    padding 16px 20px
+    .title
+      position: relative;
+      font-size: 1.28rem;
+      line-height: 46px;
+      display: inline-block;
     a
       color: var(--text-color);
     .reco-lock
@@ -78,12 +96,15 @@ export default defineComponent({
       visibility visible
       -webkit-transform: scaleX(1);
       transform: scaleX(1);
-  .tags
-    .tag-item
-      &.active
-        color $accentColor
-      &:hover
-        color $accentColor
+    .tags
+      .tag-item
+        &.active
+          color $accentColor
+        &:hover
+          color $accentColor
+    .abstract
+      color #666
+      line-height 1.6
 @media (max-width: $MQMobile)
   .tags
     display block
