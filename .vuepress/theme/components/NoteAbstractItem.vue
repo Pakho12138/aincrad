@@ -6,11 +6,11 @@
         <reco-icon v-if="item.frontmatter.keys" icon="reco-lock" />
         <router-link :to="item.path">{{ item.title }}</router-link>
       </div>
-      <PageInfo :pageInfo="item" :currentTag="currentTag" style="margin: 12px 0; --text-color-sub: #999;"> </PageInfo>
+      <PageInfo :pageInfo="item" :currentTag="currentTag" style="margin-top: 8px; --text-color-sub: #999;"> </PageInfo>
       <div class="abstract" v-html="item.excerpt"></div>
     </div>
     <div class="thumbnail-wrapper">
-      <img class="thumbnail" :src="item.firstImage || 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/child-1024x576.jpg'" />
+      <img class="thumbnail" :src="item.firstImage || 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/child-1024x576.jpg'" onerror="this.src='https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/child-1024x576.jpg'" />
     </div>
   </div>
 </template>
@@ -67,7 +67,7 @@ export default defineComponent({
   .info-detail
     flex 1
     overflow hidden
-    padding 16px 20px
+    padding 20px
     .title
       position: relative;
       font-size: 1.28rem;
