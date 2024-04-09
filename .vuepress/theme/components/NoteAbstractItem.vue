@@ -6,11 +6,12 @@
         <reco-icon v-if="item.frontmatter.keys" icon="reco-lock" />
         <router-link :to="item.path">{{ item.title }}</router-link>
       </div>
-      <PageInfo :pageInfo="item" :currentTag="currentTag" style="margin-top: 8px; --text-color-sub: #999;"> </PageInfo>
+      <PageInfo :pageInfo="item" :currentTag="currentTag" style="margin-top: 8px; --text-color-sub: #999"> </PageInfo>
       <div class="abstract" v-html="item.excerpt"></div>
+      <span class="more">...</span>
     </div>
     <div class="thumbnail-wrapper">
-      <img class="thumbnail" :src="item.firstImage || 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/child-1024x576.jpg'" onerror="this.src='https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/child-1024x576.jpg'" />
+      <img class="thumbnail" :src="item.firstImage || defaultImg" @error="handleError" />
     </div>
   </div>
 </template>
@@ -22,6 +23,16 @@ import PageInfo from './PageInfo';
 export default defineComponent({
   components: { PageInfo, RecoIcon },
   props: ['item', 'currentPage', 'currentTag'],
+  data() {
+    return {
+      defaultImg: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/child-1024x576.jpg', // 默认图片
+    };
+  },
+  methods: {
+    handleError(e){
+      e.currentTarget.src = this.defaultImg;
+    }
+  },
 });
 </script>
 
@@ -42,8 +53,13 @@ export default defineComponent({
   > * {
     pointer-events: auto;
   }
+  &:nth-child(2n-1)
+    .more
+      left 20px
   &:nth-child(2n)
     flex-direction row-reverse
+    .more
+      right 20px
   &:hover .thumbnail
     transform scale(1.2) rotate(5deg)
   .reco-sticky
@@ -65,6 +81,7 @@ export default defineComponent({
       object-position center
       transition all .6s
   .info-detail
+    position relative
     flex 1
     overflow hidden
     padding 20px
@@ -90,8 +107,9 @@ export default defineComponent({
       -webkit-transform: scaleX(0);
       transform: scaleX(0);
       transition: .3s ease-in-out;
-    &:hover a
-      color $accentColor
+    &:hover 
+      a, .more
+        color $accentColor
     &:hover:after
       visibility visible
       -webkit-transform: scaleX(1);
@@ -104,7 +122,12 @@ export default defineComponent({
           color $accentColor
     .abstract
       color #666
-      line-height 1.6
+      line-height 1.8
+    .more
+      position: absolute;
+      bottom: 10px;
+      font-size: 3rem;
+      color: #999;
 @media (max-width: $MQMobile)
   .tags
     display block

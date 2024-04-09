@@ -330,7 +330,9 @@ export default defineComponent({
     h1 {
       display: block;
       margin:0 auto 1.8rem;
-      font-size: 2.5rem;
+      font-size: 3rem;
+      font-family: cursive;
+      font-weight: bold;
     }
 
     .description {

@@ -421,6 +421,10 @@ input:focus {
           border-radius: 0.8rem !important;
 
           .title {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
             line-height: 1.4;
           }
 
@@ -429,7 +433,7 @@ input:focus {
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 3;
             overflow: hidden;
-            margin-top: 20px;
+            margin-top: 24px;
 
             h1 {
               display: none;
@@ -445,8 +449,18 @@ input:focus {
     }
 
     .info-wrapper {
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        backdrop-filter: blur(10px);
+        z-index: -1;
+      }
+
       --background-color: transparent;
-      backdrop-filter: blur(10px);
       border-radius: 0.8rem !important;
 
       .friend-link-wrapper .popup-window-wrapper .popup-window {
@@ -457,7 +471,7 @@ input:focus {
     .info-wrapper:hover {
       margin-left: 30px;
       transform: translate3d(-10px, -10px, 10px);
-      filter: drop-shadow(1px 1px 5px #ccc);
+      // filter: drop-shadow(1px 1px 5px #ccc);
       width: 200px;
     }
 
@@ -675,11 +689,7 @@ input:focus {
         height: auto;
         margin-bottom: 20px;
 
-        .abstract {
-          display: none;
-        }
-
-        .thumbnail-wrapper {
+        .abstract, .thumbnail-wrapper, .more {
           display: none;
         }
       }
