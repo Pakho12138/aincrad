@@ -139,7 +139,14 @@ module.exports = [
     // 小猫goTop
     'go-top',
     // 图片懒加载
-    'img-lazy',
+    [
+        'plugins/vuepress-plugin-img-lazy',
+        { 
+            useNative: false, // 是否使用img原生懒加载
+            loadImage: '',
+            errorImage: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/child-1024x576.jpg'
+        }
+    ],
     // 获取摘要和图片（自定义插件）
     'plugins/auto-summary',
 ]
