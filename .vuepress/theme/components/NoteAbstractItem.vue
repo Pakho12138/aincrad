@@ -25,7 +25,7 @@ export default defineComponent({
   props: ['item', 'currentPage', 'currentTag'],
   data() {
     return {
-      defaultImg: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/child-1024x576.jpg', // 默认图片
+      defaultImg: 'images/img-error.jpg', // 默认图片
       observer: null,
       options: {
         root: null,
@@ -40,6 +40,7 @@ export default defineComponent({
         if (entry.isIntersecting) {
           entry.target.classList.add('post-list-show');
           entry.target.classList.remove('img-blur');
+          this.observer.unobserve(entry.target);
         }
       });
     },
