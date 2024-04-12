@@ -423,7 +423,7 @@ input:focus {
           .title {
             display: -webkit-box;
             -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             overflow: hidden;
             line-height: 1.4;
           }
@@ -711,4 +711,32 @@ input:focus {
 // 屏蔽彩带背景点击事件
 #bgCanvas {
   pointer-events: none;
+}
+
+@keyframes fade-in-bt {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(80px);
+    transform: translateY(80px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes post-list-show {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(80px);
+    transform: translateY(80px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
 }

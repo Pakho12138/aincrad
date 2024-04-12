@@ -1,5 +1,5 @@
 <template>
-  <div class="abstract-item" @click="$router.push(item.path)">
+  <div ref="abstractRef" class="abstract-item img-blur" @click="$router.push(item.path)">
     <reco-icon v-if="item.frontmatter.sticky" icon="reco-sticky" />
     <div class="info-detail">
       <div class="title">
@@ -26,11 +26,31 @@ export default defineComponent({
   data() {
     return {
       defaultImg: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/child-1024x576.jpg', // 默认图片
+      observer: null,
+      options: {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0,
+      },
     };
   },
   methods: {
-    handleError(e){
-      e.currentTarget.src = this.defaultImg;
+    handleIntersection(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('post-list-show');
+          entry.target.classList.remove('img-blur');
+        }
+      });
+    },
+  },
+  mounted() {
+    this.observer = new IntersectionObserver(this.handleIntersection, this.options);
+    this.observer.observe(this.$refs.abstractRef);
+  },
+  beforeDestroy() {
+    if (this.observer) {
+      this.observer.disconnect();
     }
   },
 });
@@ -71,6 +91,10 @@ export default defineComponent({
     font-size 2.4rem
   &:hover
     box-shadow: var(--box-shadow-hover)
+  &.post-list-show
+    animation: fade-in-bt .5s;
+  &.img-blur .thumbnail
+    filter blur(10px)
   .thumbnail-wrapper
     width 55%
     overflow hidden
@@ -107,8 +131,8 @@ export default defineComponent({
       -webkit-transform: scaleX(0);
       transform: scaleX(0);
       transition: .3s ease-in-out;
-    &:hover 
-      a, .more
+    &:hover
+      .title, a, .more
         color $accentColor
     &:hover:after
       visibility visible

@@ -4,7 +4,7 @@
       <div class="hero-bg" :style="{ ...bgImageStyle }"></div>
 
       <span class="anchor-down" @click="scrollFn"></span>
-      
+
       <div class="video-wrapper">
         <video
           ref="videoRef"
@@ -55,7 +55,7 @@
           <!-- 博客列表 -->
           <note-abstract :data="$recoPosts" @paginationChange="paginationChange" />
         </div>
-        <div class="info-wrapper">
+        <div ref="infoRef" class="info-wrapper">
           <PersonalInfo />
           <h4><reco-icon icon="reco-category" /> {{ $recoLocales.category }}</h4>
           <ul class="category-wrapper">
@@ -105,6 +105,12 @@ export default defineComponent({
       isVideoInit: false,
       isCanPlay: false,
       isPlay: false,
+      observer: null,
+      options: {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0,
+      },
     };
   },
   setup(props, ctx) {
@@ -177,6 +183,10 @@ export default defineComponent({
       this.bubbles = module.default;
     });
     this.recoShow = true;
+
+    // 视口监听
+    this.observer = new IntersectionObserver(this.handleIntersection, this.options);
+    this.observer.observe(this.$refs.infoRef);
   },
 
   methods: {
@@ -224,6 +234,16 @@ export default defineComponent({
       this.showBgVideo = false;
       this.isVideoInit = false;
       this.isPlay = false;
+    },
+    handleIntersection(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          if (this.observer) {
+            this.observer.disconnect();
+          }
+        }
+      });
     },
   },
 });
@@ -372,6 +392,9 @@ export default defineComponent({
       background var(--background-color)
       &:hover {
         box-shadow var(--box-shadow-hover)
+      }
+      &.show{
+        animation: fade-in-bt .5s;
       }
       h4 {
         color var(--text-color)
