@@ -191,9 +191,9 @@ export default defineComponent({
 
   methods: {
     paginationChange(page) {
-      setTimeout(() => {
-        window.scrollTo(0, this.heroHeight);
-      }, 100);
+      // setTimeout(() => {
+      //   window.scrollTo(0, this.heroHeight);
+      // }, 100);
     },
     getPagesByTags(tagInfo) {
       this.$router.push({ path: tagInfo.path });
