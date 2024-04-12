@@ -382,7 +382,7 @@ export default defineComponent({
       top 70px
       overflow hidden
       transition all .3s
-      margin-left 30px
+      margin-left 40px
       flex 0 0 300px
       height auto
       box-shadow var(--box-shadow)

@@ -67,7 +67,7 @@ export default defineComponent({
 }
 
 .btn-next {
-  margin: 0 auto;
+  margin: 40px auto 0;
   width: 80px;
   padding: 13px 35px;
   border: 1px solid #d6d6d6;

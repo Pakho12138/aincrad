@@ -60,7 +60,8 @@ module.exports = [
                 hoverTips: ['心里的花，我想要带你回家', '汪，汪汪~', ' (*･´ω`･)っ'],
                 clickTips: ['嗷呜~', 'o(*￣▽￣*)o'],
             },
-            messageStyle: { right: '68px', bottom: '250px' },
+            modelStyle: { left: '20px', bottom: '-50px'},
+            messageStyle: { left: '20px', bottom: '250px' },
             width: 250,
             height: 320
         }

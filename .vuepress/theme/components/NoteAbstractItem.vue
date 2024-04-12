@@ -60,7 +60,6 @@ export default defineComponent({
 .abstract-item
   display flex
   position relative
-  margin: 0 auto 40px;
   width 100%
   height 300px
   overflow: hidden;
@@ -73,6 +72,8 @@ export default defineComponent({
   > * {
     pointer-events: auto;
   }
+  & + &
+    margin: 40px auto 0px;
   &:nth-child(2n-1)
     .more
       left 20px

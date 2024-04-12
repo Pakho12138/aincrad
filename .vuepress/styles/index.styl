@@ -409,10 +409,6 @@ input:focus {
   }
 
   .home-blog-wrapper {
-    .info-wrapper {
-      border-radius: 1rem !important;
-    }
-
     .blog-list {
       .abstract-wrapper {
         .abstract-item {
@@ -457,6 +453,7 @@ input:focus {
         left: 0;
         right: 0;
         backdrop-filter: blur(10px);
+        border-radius: 0.8rem;
         z-index: -1;
       }
 
@@ -469,7 +466,7 @@ input:focus {
     }
 
     .info-wrapper:hover {
-      margin-left: 30px;
+      margin-left: 40px;
       transform: translate3d(-10px, -10px, 10px);
       // filter: drop-shadow(1px 1px 5px #ccc);
       width: 200px;
@@ -711,6 +708,11 @@ input:focus {
 // 屏蔽彩带背景点击事件
 #bgCanvas {
   pointer-events: none;
+}
+
+// 隐藏回到顶部小火箭
+.back-to-ceiling {
+  display: none !important;
 }
 
 @keyframes fade-in-bt {
