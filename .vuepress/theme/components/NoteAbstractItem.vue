@@ -11,7 +11,7 @@
       <span class="more">...</span>
     </div>
     <div class="thumbnail-wrapper">
-      <img-lazy class="thumbnail" :src="item.firstImage || defaultImg" />
+      <img-lazy class="thumbnail" :src="item.frontmatter.image || item.firstImage || defaultImg" />
     </div>
   </div>
 </template>

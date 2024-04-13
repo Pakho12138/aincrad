@@ -4,6 +4,7 @@ tags:
   - Windows 10
 categories:
   - 电脑系统
+image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404131535964.jpeg
 ---
 
 # Windows 通过注册表强制禁用系统服务

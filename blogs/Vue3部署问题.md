@@ -5,6 +5,7 @@ tags:
   - 部署
 categories:
   - 前端
+image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132235831.png
 ---
 
 # Vue3 部署问题

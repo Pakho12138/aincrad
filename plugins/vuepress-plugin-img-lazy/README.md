@@ -1,3 +1,7 @@
+---
+image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132318931.png
+---
+
 # vuepress-plugin-img-lazy
 
 > a vuepress plugin to better supporting image lazy loading

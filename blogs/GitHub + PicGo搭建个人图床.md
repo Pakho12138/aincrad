@@ -6,6 +6,7 @@ tags:
   - PicList
 categories:
   - 技术
+image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132158489.png
 ---
 
 # GitHub + PicGo 搭建个人图床
