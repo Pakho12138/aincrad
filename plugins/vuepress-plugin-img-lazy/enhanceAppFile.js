@@ -30,7 +30,14 @@ export default ({ Vue }) => {
               const src = this.getSrc(item.target)
 
               if (src) {
-                item.target.src = src
+                const img = new Image()
+                img.src = src
+                img.onload = ()=>{
+                  item.target.src = src
+                }
+                img.onerror = ()=>{
+                  item.target.src = src
+                }
               }
               this.$io.unobserve(item.target)
             }

@@ -1,9 +1,11 @@
 <template>
   <img
     v-bind="$attrs"
+    :src="config.loadImage"
     :data-src="dataSrc"
     :loading="config.useNative ? 'lazy' : null"
-    :class="config.selector"
+    :class="[config.selector, { 'show' : showAnimate }]"
+    @load="handleImageLoad"
     @error="handleError"
   />
 </template>
@@ -17,6 +19,12 @@ export default {
     src: {
       type: String,
       required: true
+    }
+  },
+  data(){
+    return {
+      isFirst: true,
+      showAnimate: false
     }
   },
   computed: {
@@ -35,7 +43,37 @@ export default {
     handleError(e){
       config.errorImage && (e.currentTarget.src = config.errorImage);
       this.$emit('error', e);
+    },
+    handleImageLoad(){
+      if (!this.isFirst) {
+        this.showAnimate = true;
+      }
+      this.isFirst = false;
     }
   },
 }
 </script>
+
+<style lang="stylus" scoped>
+.show
+  animation blur-in 1s
+
+@-webkit-keyframes blur-in {
+  0% {
+    filter: blur(10px);
+  }
+
+  100% {
+    filter: blur(0);
+  }
+}
+@keyframes blur-in {
+  0% {
+    filter: blur(10px);
+  }
+
+  100% {
+    filter: blur(0);
+  }
+}
+</style>
