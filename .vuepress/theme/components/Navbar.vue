@@ -3,8 +3,10 @@
     <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
 
     <router-link :to="$localePath" class="home-link">
-      <img class="logo" v-if="$themeConfig.logo" :src="$withBase($themeConfig.logo)" :alt="$siteTitle" />
-      <span ref="siteName" class="site-name" v-if="$siteTitle">{{ $siteTitle }}</span>
+      <div @mouseenter="$kbnShowTip('点击<b>LOGO</b>前往首页，想回到上一页可以使用浏览器的后退功能哦~')">
+        <img class="logo" v-if="$themeConfig.logo" :src="$withBase($themeConfig.logo)" :alt="$siteTitle" />
+        <span ref="siteName" class="site-name" v-if="$siteTitle">{{ $siteTitle }}</span>
+      </div>
     </router-link>
 
     <div

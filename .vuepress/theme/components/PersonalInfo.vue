@@ -5,6 +5,7 @@
     v-if="$themeConfig.authorAvatar"
     :src="$withBase($themeConfig.authorAvatar)"
     alt="author-avatar"
+    @mouseenter="$kbnShowTip(`鼠标放上面看看~`)"
   >
   <h3
     class="name"
@@ -27,6 +28,7 @@
       class="social-item"
       v-for="(item, index) in socialLinks"
       :key="index"
+      @mouseenter="$kbnShowTip(`想访问链接<b>“${item.link}”</b>么？`)"
     >
       <reco-icon :icon="item.icon" :link="item.link" :style="{ color: item.color }" />
     </li>

@@ -7,7 +7,8 @@
         :class="title == item.name ? 'active': ''"
         v-for="(item, index) in $categoriesList"
         v-show="item.pages.length > 0"
-        :key="index">
+        :key="index"
+        @mouseenter="$kbnShowTip(`想看看分类<b>“${item.name}”</b>么？`)">
         <router-link :to="item.path">
           <span class="category-name">{{ item.name }}</span>
           <span class="post-num" :style="{ 'backgroundColor': getOneColor() }">{{ item.pages.length }}</span>

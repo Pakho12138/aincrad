@@ -1,5 +1,5 @@
 <template>
-  <div id="dayNightSwitch" class="generalWrapper" v-if="$themeConfig.modePicker !== false" >
+  <div id="dayNightSwitch" class="generalWrapper" v-if="$themeConfig.modePicker !== false"  @mouseenter="$kbnShowTip('点击可以切换白天黑夜模式哦~')">
     <a @click="updateMode" class="click">
       <div :class="currentMode === 'dark' ? ['onOff'] : ['onOff', 'daySwitch']">
         <div class="star star1"></div>

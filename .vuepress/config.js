@@ -78,7 +78,7 @@ module.exports = {
         },
         {
           icon: 'reco-gitlab',
-          link: 'https://gitlab.com/',
+          link: 'https://gitlab.com',
         },
         {
           icon: 'reco-juejin',
@@ -86,11 +86,11 @@ module.exports = {
         },
         {
           icon: 'reco-csdn',
-          link: 'https://www.csdn.net/',
+          link: 'https://www.csdn.net',
         },
         {
           icon: 'reco-npm',
-          link: 'https://www.npmjs.com/',
+          link: 'https://www.npmjs.com',
         },
       ],
     },

@@ -1,5 +1,5 @@
 <template>
-  <div ref="abstractRef" class="abstract-item img-blur" @click="$router.push(item.path)">
+  <div ref="abstractRef" class="abstract-item img-blur" @click="$router.push(item.path)" @mouseenter="showKbnTip(item.title)">
     <reco-icon v-if="item.frontmatter.sticky" icon="reco-sticky" />
     <div class="info-detail">
       <div class="title">
@@ -43,6 +43,10 @@ export default defineComponent({
           this.observer.unobserve(entry.target);
         }
       });
+    },
+    showKbnTip(text) {
+      // 看板娘提示
+      this.$kbnShowTip(`想看看文章<b>《${text}》</b>么？`);
     },
   },
   mounted() {

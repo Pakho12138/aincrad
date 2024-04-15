@@ -3,7 +3,7 @@
     <div class="hero">
       <div class="hero-bg" :style="{ ...bgImageStyle }"></div>
 
-      <span class="anchor-down" @click="scrollFn"></span>
+      <span class="anchor-down" @click="scrollFn" @mouseenter="$kbnShowTip('点击这里，探索未知的世界~')"></span>
 
       <div class="video-wrapper">
         <video
@@ -17,7 +17,7 @@
           @waiting="handleVideoWaiting"
           @playing="handleVideoPlay"
           @pause="handleVideoPause"></video>
-        <div class="video-btn" :class="{ 'video-play': !isPlay, 'video-pause': isPlay }" @click="toggleVideoStatus"></div>
+        <div class="video-btn" :class="{ 'video-play': !isPlay, 'video-pause': isPlay }" @click="toggleVideoStatus" @mouseenter="$kbnShowTip('想看视频吗？可以先从左下角关闭音乐呢~')"></div>
         <div v-if="showBgVideo" class="video-btn video-close" @click="closeBgVideo"></div>
         <div class="video-stu" :class="{ show: showBgVideo && (!isVideoInit || !isCanPlay || !isPlay) }">
           <span v-if="!isVideoInit">视频加载中...</span>
@@ -32,14 +32,14 @@
 
       <div class="focus-info" :class="{ hide: isPlay }">
         <ModuleTransition delay="0.04">
-          <h1 class="hover" v-if="recoShowModule && $frontmatter.heroText !== null">
+          <h1 class="hover" v-if="recoShowModule && $frontmatter.heroText !== null" @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
             {{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}
           </h1>
         </ModuleTransition>
 
         <ModuleTransition delay="0.08">
           <div>
-            <span id="description" v-if="recoShowModule && $frontmatter.tagline !== null" class="description hover">
+            <span id="description" v-if="recoShowModule && $frontmatter.tagline !== null" class="description hover" @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
               <!-- {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }} -->
             </span>
           </div>
@@ -59,7 +59,7 @@
           <PersonalInfo />
           <h4><reco-icon icon="reco-category" /> {{ $recoLocales.category }}</h4>
           <ul class="category-wrapper">
-            <li class="category-item" v-for="(item, index) in this.$categories.list" :key="index">
+            <li class="category-item" v-for="(item, index) in this.$categories.list" :key="index" @mouseenter="$kbnShowTip(`想看看分类<b>“${item.name}”</b>么？`)">
               <router-link :to="item.path">
                 <span class="category-name">{{ item.name }}</span>
                 <span class="post-num" :style="{ backgroundColor: getOneColor() }">{{ item.pages.length }}</span>
@@ -162,7 +162,7 @@ export default defineComponent({
       state.recoShow = true;
 
       new Typed('#description', {
-        strings: instance.$frontmatter.tagline,
+        strings: instance.$frontmatter.tagline || instance.$description,
         typeSpeed: 35,
         backDelay: 1500,
         backSpeed: 25,
@@ -187,6 +187,21 @@ export default defineComponent({
     // 视口监听
     this.observer = new IntersectionObserver(this.handleIntersection, this.options);
     this.observer.observe(this.$refs.infoRef);
+
+    const goTopEl = document.getElementById('goTop');
+    goTopEl && goTopEl.addEventListener('mouseenter', ()=>{
+      this.$kbnShowTip('回到开始的地方~');
+    })
+
+    const musicEl = document.querySelector('.reco-bgm-panel');
+    musicEl && musicEl.addEventListener('mouseenter', ()=>{
+      this.$kbnShowTip('畅游音乐海洋吧~');
+    })
+
+    const searchEl = document.querySelector('.search-box');
+    searchEl && searchEl.addEventListener('mouseenter', ()=>{
+      this.$kbnShowTip('这世界总有人在忙忙碌碌寻宝藏~');
+    })
   },
 
   methods: {

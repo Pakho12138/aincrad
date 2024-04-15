@@ -4,7 +4,7 @@
       class="friend-link-item"
       v-for="(item, index) in dataAddColor"
       :key="index"
-      @mouseenter="showDetail($event)"
+      @mouseenter="showDetail($event, item)"
       @mouseleave="hideDetail($event)"
       target="_blank">
       <span
@@ -65,7 +65,10 @@ const useDetail = () => {
     }
   }
 
-  const showDetail = (e) => {
+  const showDetail = (e, item) => {
+    // 看板娘提示
+    instance.$kbnShowTip(`想访问网页<b>“${item.title}”</b>么？`);
+
     const currentDom = e.target
     const popupWindowWrapper = currentDom.querySelector('.popup-window-wrapper')
     popupWindowWrapper.style.display = 'block'

@@ -4,37 +4,40 @@
       v-for="(item, index) in tags"
       v-show="!item.pages || (item.pages && item.pages.length > 0)"
       :key="index"
-      :class="{'active': item.name == currentTag}"
-      :style="{ 'backgroundColor': getOneColor() }"
-      @click="tagClick(item)">{{item.name}}</span>
+      :class="{ active: item.name == currentTag }"
+      :style="{ backgroundColor: getOneColor() }"
+      @click="tagClick(item)"
+      @mouseenter="$kbnShowTip(`想看看标签<b>“${item.name}”</b>么？`)">
+      {{ item.name }}
+    </span>
   </div>
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
-import { getOneColor } from '@theme/helpers/other'
-import { useInstance } from '@theme/helpers/composable'
+import { defineComponent, computed } from 'vue';
+import { getOneColor } from '@theme/helpers/other';
+import { useInstance } from '@theme/helpers/composable';
 
 export default defineComponent({
   props: {
     currentTag: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
-  setup (props, ctx) {
-    const instance = useInstance()
+  setup(props, ctx) {
+    const instance = useInstance();
     const tags = computed(() => {
-      return [{ name: instance.$recoLocales.all, path: '/tag/' }, ...instance.$tagesList]
-    })
+      return [{ name: instance.$recoLocales.all, path: '/tag/' }, ...instance.$tagesList];
+    });
 
     const tagClick = tag => {
-      ctx.emit('getCurrentTag', tag)
-    }
+      ctx.emit('getCurrentTag', tag);
+    };
 
-    return { tags, tagClick, getOneColor }
-  }
-})
+    return { tags, tagClick, getOneColor };
+  },
+});
 </script>
 
 <style lang="stylus" scoped>

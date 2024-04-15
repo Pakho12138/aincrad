@@ -29,6 +29,7 @@
         class="tag-item"
         :class="{ 'active': currentTag == subItem }"
         @click.stop="goTags(subItem)"
+        @mouseenter="$kbnShowTip(`想看看标签<b>“${subItem}”</b>么？`)"
       >{{subItem}}</span>
     </reco-icon>
   </div>

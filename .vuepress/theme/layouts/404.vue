@@ -4,6 +4,7 @@
       <h1>404</h1>
       <blockquote>{{ getMsg() }}</blockquote>
       <router-link to="/">Take me home.</router-link>
+      <img-lazy src="https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404141051488.png" />
     </article>
   </section>
 </template>
@@ -64,6 +65,12 @@ export default defineComponent({
       padding: 6px 20px!important
       text-decoration: none!important
       border-radius: 4px
+a
+  display block
+img
+  display: block;
+  width: 50%;
+  margin: 40px auto;
 
 @media screen and (max-width: 720px)
   .mod_404

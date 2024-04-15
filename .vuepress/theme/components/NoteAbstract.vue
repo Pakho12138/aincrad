@@ -2,7 +2,7 @@
   <div class="abstract-wrapper">
     <NoteAbstractItem v-for="item in currentPageData" :key="item.path" :item="item" :currentPage="currentPage" :currentTag="currentTag" />
     <pagation v-show="false" class="pagation" :total="data.length" :currentPage="currentPage" @getCurrentPage="getCurrentPage" />
-    <div v-if="showNextBtn" class="btn-next" @click="currentPage++">加载更多</div>
+    <div v-if="showNextBtn" class="btn-next" @click="currentPage++" @mouseenter="$kbnShowTip(`去看看更多文章~`)">加载更多</div>
   </div>
 </template>
 

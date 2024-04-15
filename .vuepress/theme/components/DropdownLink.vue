@@ -28,7 +28,7 @@
             ><NavLink :item="childSubItem"/></li>
           </ul>
 
-          <NavLink v-else :item="subItem" />
+          <NavLink v-else :pTitle="item.text" :item="subItem" />
         </li>
       </ul>
     </DropdownTransition>
