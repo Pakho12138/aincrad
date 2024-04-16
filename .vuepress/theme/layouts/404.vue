@@ -50,7 +50,7 @@ export default defineComponent({
 
 <style src="../styles/theme.styl" lang="stylus"></style>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .content
   margin 4rem auto 0
   max-width 800px
