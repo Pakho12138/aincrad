@@ -37,13 +37,20 @@
           </h1>
         </ModuleTransition>
 
-        <ModuleTransition delay="0.08">
-          <div>
-            <span id="description" v-if="recoShowModule && $frontmatter.tagline !== null" class="description hover" @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
-              <!-- {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }} -->
-            </span>
+        <div class="header-info">
+          <ModuleTransition delay="0.08">
+            <div>
+              <span id="description" v-if="recoShowModule && $frontmatter.tagline !== null" class="description hover" @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
+                <!-- {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }} -->
+              </span>
+            </div>
+          </ModuleTransition>
+          <div class="link-btns">
+            <img src="svg/next-b.svg" class="ic-arrow pre" />
+            <PersonalInfo />
+            <img src="svg/next-b.svg" class="ic-arrow" />
           </div>
-        </ModuleTransition>
+        </div>
       </div>
 
       <component v-if="bubbles && !isPlay" :is="bubbles" :options="options"></component>
@@ -55,7 +62,7 @@
           <!-- 博客列表 -->
           <note-abstract :data="$recoPosts" @paginationChange="paginationChange" />
         </div>
-        <div ref="infoRef" class="info-wrapper">
+        <!-- <div ref="infoRef" class="info-wrapper">
           <PersonalInfo />
           <h4><reco-icon icon="reco-category" /> {{ $recoLocales.category }}</h4>
           <ul class="category-wrapper">
@@ -71,7 +78,7 @@
           <TagList @getCurrentTag="getPagesByTags" />
           <h4 v-if="$themeConfig.friendLink && $themeConfig.friendLink.length !== 0"><reco-icon icon="reco-friend" /> {{ $recoLocales.friendLink }}</h4>
           <FriendLink />
-        </div>
+        </div> -->
       </div>
     </ModuleTransition>
 
@@ -189,19 +196,22 @@ export default defineComponent({
     this.observer.observe(this.$refs.infoRef);
 
     const goTopEl = document.getElementById('goTop');
-    goTopEl && goTopEl.addEventListener('mouseenter', ()=>{
-      this.$kbnShowTip('回到开始的地方~');
-    })
+    goTopEl &&
+      goTopEl.addEventListener('mouseenter', () => {
+        this.$kbnShowTip('回到开始的地方~');
+      });
 
     const musicEl = document.querySelector('.reco-bgm-panel');
-    musicEl && musicEl.addEventListener('mouseenter', ()=>{
-      this.$kbnShowTip('畅游音乐海洋吧~');
-    })
+    musicEl &&
+      musicEl.addEventListener('mouseenter', () => {
+        this.$kbnShowTip('畅游音乐海洋吧~');
+      });
 
     const searchEl = document.querySelector('.search-box');
-    searchEl && searchEl.addEventListener('mouseenter', ()=>{
-      this.$kbnShowTip('这世界总有人在忙忙碌碌寻宝藏~');
-    })
+    searchEl &&
+      searchEl.addEventListener('mouseenter', () => {
+        this.$kbnShowTip('这世界总有人在忙忙碌碌寻宝藏~');
+      });
   },
 
   methods: {
@@ -370,10 +380,58 @@ export default defineComponent({
       font-weight: bold;
     }
 
-    .description {
-      margin: 1.8rem auto;
-      font-size: 1.6rem;
-      line-height: 1.3;
+    .header-info{
+      min-width: 90%;
+      display: inline-block;
+      position: relative;
+      margin: auto;
+      color: #eaeadf;
+      background: rgba(0, 0, 0, .5);
+      padding: 15px;
+      margin-top: 22px;
+      letter-spacing: 0;
+      line-height: 30px;
+      border-radius: 10px;
+      box-sizing: initial;
+      white-space: nowrap;
+      &:before {
+        content: "";
+        position: absolute;
+        top: -28.5px;
+        left: 30%;
+        margin-left: -15px;
+        border-width: 15px;
+        border-style: solid;
+        border-color: transparent transparent rgba(0, 0, 0, .5) transparent;
+      }
+      .description {
+        margin: 1.8rem auto;
+        font-size: 1.2rem;
+        line-height: 1.3;
+      }
+      .link-btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        .personal-info-wrapper {
+          .personal-img, .name, .num, hr {
+            display: none;
+          }
+          .social-links {
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+          }
+        }
+        .ic-arrow {
+          width: 39px;
+          height: 28px;
+          &.pre {
+            transform: rotate(180deg)
+          }
+        }
+      }
     }
   }
   .home-blog-wrapper {
@@ -383,6 +441,8 @@ export default defineComponent({
     padding 0 20px
     max-width $homePageWidth
     .blog-list {
+      max-width 800px
+      margin 0 auto
       flex auto
       width 0
       .abstract-wrapper {
