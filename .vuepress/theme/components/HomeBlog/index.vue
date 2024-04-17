@@ -1,7 +1,7 @@
 <template>
   <div class="home-blog">
     <div class="hero">
-      <div class="hero-bg" :style="{ ...bgImageStyle }"></div>
+      <div class="hero-bg" :class="{'show' : bgLoaded && !(preClicked || nextClicked), 'back-in-right' : nextClicked, 'back-in-left' : preClicked }" :style="{ ...bgImageStyle }"></div>
 
       <span class="anchor-down" @click="scrollFn" @mouseenter="$kbnShowTip('点击这里，探索未知的世界~')"></span>
 
@@ -46,9 +46,9 @@
             </div>
           </ModuleTransition>
           <div class="link-btns">
-            <img src="svg/next-b.svg" class="ic-arrow pre" />
+            <img src="svg/next-b.svg" class="ic-arrow pre" @click="changeBg($event, true)" @mouseenter="$kbnShowTip('点击这里可以切换背景哟~')" />
             <PersonalInfo />
-            <img src="svg/next-b.svg" class="ic-arrow" />
+            <img src="svg/next-b.svg" class="ic-arrow" @click="changeBg" @mouseenter="$kbnShowTip('点击这里可以切换背景哟~')" />
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import { defineComponent, toRefs, reactive, computed, onMounted } from 'vue';
+import { defineComponent, toRefs, ref, reactive, computed, onMounted } from 'vue';
 import TagList from '@theme/components/TagList';
 import FriendLink from '@theme/components/FriendLink';
 import NoteAbstract from '@theme/components/NoteAbstract';
@@ -147,26 +147,56 @@ export default defineComponent({
     //   return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle;
     // });
 
+    const bgImage = ref('');
+    const bgIndex = ref(0);
+    const bgLoaded = ref(false);
     // 自定义修改的背景图片设置, 随机产生一张图片
     const bgImageStyle = computed(() => {
-      const url = instance.$themeConfig.heroImages[Math.floor(Math.random() * instance.$themeConfig.heroImages.length)]
-        ? instance.$withBase(instance.$themeConfig.heroImages[Math.floor(Math.random() * instance.$themeConfig.heroImages.length)])
-        : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
-
       const initBgImageStyle = {
-        textAlign: 'center',
-        overflow: 'hidden',
-        background: `url(${url}) center/cover no-repeat `,
+        background: `url(${bgImage.value}) center/cover no-repeat `,
       };
       // 获取用户自定义的样式，优先更高
       const { bgImageStyle } = instance.$frontmatter;
 
       return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle;
     });
+    
+    const preClicked = ref(false);
+    const nextClicked = ref(false);
+    const changeBg = (e, isPre = false) => {
+      preClicked.value = isPre;
+      nextClicked.value = !isPre;
+      setTimeout(() => {
+        preClicked.value = false;
+        nextClicked.value = false;
+      }, 1000);
+      bgLoaded.value = false;
+      isPre ? bgIndex.value-- : bgIndex.value++;
+      const url = instance.$themeConfig.heroImages[Math.abs(bgIndex.value) % instance.$themeConfig.heroImages.length];
+      bgImage.value = url ? instance.$withBase(url) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
+      isBgLoaded();
+    }
+
+    const isBgLoaded = ()=>{
+      let img = new Image();
+      img.src = bgImage.value;
+      img.onload = ()=>{
+        bgLoaded.value = true;
+        img = null;
+      }
+      img.onerror = ()=>{
+        img = null;
+      }
+    }
 
     onMounted(() => {
       state.heroHeight = document.querySelector('.hero').clientHeight;
       state.recoShow = true;
+
+      bgIndex.value = Math.floor(Math.random() * instance.$themeConfig.heroImages.length);
+      const randomBg = instance.$themeConfig.heroImages[bgIndex.value];
+      bgImage.value = randomBg ? instance.$withBase(randomBg) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
+      isBgLoaded();
 
       new Typed('#description', {
         strings: instance.$frontmatter.tagline || instance.$description,
@@ -178,7 +208,7 @@ export default defineComponent({
       });
     });
 
-    return { recoShowModule, heroImageStyle, bgImageStyle, ...toRefs(state), getOneColor };
+    return { recoShowModule, heroImageStyle, bgImageStyle, ...toRefs(state), getOneColor, changeBg, bgLoaded, preClicked, nextClicked };
   },
   mounted() {
     console.log(
@@ -192,8 +222,8 @@ export default defineComponent({
     this.recoShow = true;
 
     // 视口监听
-    this.observer = new IntersectionObserver(this.handleIntersection, this.options);
-    this.observer.observe(this.$refs.infoRef);
+    // this.observer = new IntersectionObserver(this.handleIntersection, this.options);
+    // this.observer.observe(this.$refs.infoRef);
 
     const goTopEl = document.getElementById('goTop');
     goTopEl &&
@@ -290,11 +320,19 @@ export default defineComponent({
     text-align center
     overflow hidden
 
-    .hero-bg{
+    .hero-bg {
       position absolute
       width 100%
       height 100%
-      animation zoom-in 10s linear forwards, fade-in 2.5s linear forwards
+      &.show {
+        animation zoom-in 10s linear both
+      }
+      &.back-in-right {
+        animation backInRight 1s
+      }
+      &.back-in-left {
+        animation backInLeft 1s
+      }
     }
 
     .video-wrapper{
@@ -639,13 +677,39 @@ export default defineComponent({
 @keyframes zoom-in{
   to{transform:scale(1.1);}
 }
-@-webkit-keyframes fade-in{
-  from{filter: blur(5px);}
-  to{filter: blur(0);}
+
+@keyframes backInRight {
+  0% {
+    transform: translateX(2000px) scale(0.8);
+    opacity: 0.7;
+  }
+
+  80% {
+    transform: translateX(0px) scale(0.8);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
-@keyframes fade-in{
-  from{filter: blur(5px);}
-  to{filter: blur(0);}
+
+@keyframes backInLeft {
+  0% {
+    transform: translateX(-2000px) scale(0.8);
+    opacity: 0.7;
+  }
+
+  80% {
+    transform: translateX(0px) scale(0.8);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes poi-face {
