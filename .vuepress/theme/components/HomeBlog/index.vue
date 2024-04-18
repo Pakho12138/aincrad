@@ -441,11 +441,11 @@ export default defineComponent({
       &:before {
         content: "";
         position: absolute;
-        top: -15px;
+        top: -16px;
         left: 30%;
         transform: translateY(-50%);
-        margin-left: -15px;
-        border-width: 15px;
+        margin-left: -16px;
+        border-width: 16px;
         border-style: solid;
         border-color: transparent transparent rgba(0, 0, 0, .5) transparent;
       }
