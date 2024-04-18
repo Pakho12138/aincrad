@@ -21,8 +21,8 @@
         <div v-if="showBgVideo" class="video-btn video-close" @click="closeBgVideo"></div>
         <div class="video-stu" :class="{ show: showBgVideo && (!isVideoInit || !isCanPlay || !isPlay) }">
           <span v-if="!isVideoInit">视频加载中...</span>
-          <span v-if="isVideoInit && !isPlay">已暂停...</span>
-          <span v-if="isVideoInit && isPlay && !isCanPlay">缓冲中...</span>
+          <span v-if="isVideoInit && isCanPlay && !isPlay">已暂停...</span>
+          <span v-if="isVideoInit && !isCanPlay">缓冲中...</span>
         </div>
       </div>
 
@@ -273,7 +273,9 @@ export default defineComponent({
       }
     },
     loadedMetaData() {
-      this.isVideoInit = true;
+      setTimeout(() => {
+        this.isVideoInit = true;
+      }, 400);
     },
     handleVideoPlay() {
       this.isPlay = true;
@@ -287,8 +289,10 @@ export default defineComponent({
     },
     closeBgVideo() {
       this.showBgVideo = false;
-      this.isVideoInit = false;
-      this.isPlay = false;
+      setTimeout(() => { // 等待动画结束
+        this.isVideoInit = false;
+        this.isPlay = false;
+      }, 400);
     },
     handleIntersection(entries) {
       entries.forEach(entry => {
@@ -387,6 +391,8 @@ export default defineComponent({
         text-align: center;
         color: #666;
         width: 100%;
+        min-height: 37px;
+        box-sizing: border-box;
         background-color: rgba(255, 255, 255, .8);
         border-radius: 0;
         font-size: 18px;
@@ -435,8 +441,9 @@ export default defineComponent({
       &:before {
         content: "";
         position: absolute;
-        top: -28.5px;
+        top: -15px;
         left: 30%;
+        transform: translateY(-50%);
         margin-left: -15px;
         border-width: 15px;
         border-style: solid;
