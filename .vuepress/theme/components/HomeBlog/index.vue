@@ -16,11 +16,13 @@
           @canplay="videoCanPlay"
           @waiting="handleVideoWaiting"
           @playing="handleVideoPlay"
-          @pause="handleVideoPause"></video>
+          @pause="handleVideoPause"
+          @error="handleVideoError"
+          ></video>
         <div class="video-btn" :class="{ 'video-play': !isPlay, 'video-pause': isPlay }" @click="toggleVideoStatus" @mouseenter="$kbnShowTip('想看视频吗？可以先从左下角关闭音乐呢~')"></div>
         <div v-if="showBgVideo" class="video-btn video-close" @click="closeBgVideo"></div>
         <div class="video-stu" :class="{ show: showBgVideo && (!isVideoInit || !isCanPlay || !isPlay) }">
-          <span v-if="!isVideoInit">视频加载中...</span>
+          <span v-if="!isVideoInit">{{isError ? '视频加载出错' : '视频加载中...'}}</span>
           <span v-if="isVideoInit && isCanPlay && !isPlay">已暂停...</span>
           <span v-if="isVideoInit && !isCanPlay">缓冲中...</span>
         </div>
@@ -112,6 +114,7 @@ export default defineComponent({
       isVideoInit: false,
       isCanPlay: false,
       isPlay: false,
+      isError: false,
       observer: null,
       options: {
         root: null,
@@ -286,6 +289,9 @@ export default defineComponent({
     handleVideoWaiting() {
       console.log('waiting');
       this.isCanPlay = false;
+    },
+    handleVideoError(){
+      this.isError = true;
     },
     closeBgVideo() {
       this.showBgVideo = false;
