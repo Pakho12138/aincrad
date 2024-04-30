@@ -5,6 +5,8 @@
 
       <span class="anchor-down" @click="scrollFn" @mouseenter="$kbnShowTip('点击这里，探索未知的世界~')"></span>
 
+      <!-- <VideoPlayer url="https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/video/花火PV/花火PV.m3u8" style="position: absolute; bottom: 80px; right: 0; z-index: 100;"></VideoPlayer> -->
+
       <div class="video-wrapper">
         <video
           ref="videoRef"
@@ -100,9 +102,10 @@ import PersonalInfo from '@theme/components/PersonalInfo';
 import { getOneColor } from '@theme/helpers/other';
 import { useInstance, useShowModule } from '@theme/helpers/composable';
 import Typed from '@theme/lib/typed.js';
+import VideoPlayer from '@theme/components/VideoPlayer';
 
 export default defineComponent({
-  components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo, RecoIcon },
+  components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo, RecoIcon, VideoPlayer },
   data() {
     return {
       recoShow: false,
