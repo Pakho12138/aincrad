@@ -6,7 +6,7 @@ const friendLink = require("./config/friendLink");
 module.exports = {
   base: '/aincrad/',
   title: "AINCRAD",
-  description: "别让认知束缚自己",
+  description: "愿此行，终抵群星",
   dest: "public",
   permalink: "/:slug", // 开启永久路径
   head: [

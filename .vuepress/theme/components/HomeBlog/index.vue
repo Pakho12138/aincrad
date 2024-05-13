@@ -60,6 +60,8 @@
       <component v-if="bubbles && !isPlay" :is="bubbles" :options="options"></component>
     </div>
 
+    <Banner v-show="recoShowModule" />
+    
     <ModuleTransition delay="0.16">
       <div v-show="recoShowModule" class="home-blog-wrapper">
         <div class="blog-list">
@@ -103,9 +105,10 @@ import { getOneColor } from '@theme/helpers/other';
 import { useInstance, useShowModule } from '@theme/helpers/composable';
 import Typed from '@theme/lib/typed.js';
 import VideoPlayer from '@theme/components/VideoPlayer';
+import Banner from '@theme/components/Banner.vue';
 
 export default defineComponent({
-  components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo, RecoIcon, VideoPlayer },
+  components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo, RecoIcon, VideoPlayer, Banner },
   data() {
     return {
       recoShow: false,

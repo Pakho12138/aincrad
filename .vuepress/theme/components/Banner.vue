@@ -1,0 +1,122 @@
+<template>
+  <div class="banner">
+    <div class="banner-item select-cursor" v-for="(item, index) in bannerList" :key="index" @click="jumpUrl(item.url)">
+      <img-lazy class="thumbnail" :src="item.cover || defaultImg" />
+      <div class="info">
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.tip }}</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { getCurrentInstance, onMounted, reactive, ref } from 'vue';
+
+const { proxy } = getCurrentInstance();
+
+const bannerList = ref([
+  {
+    name: '音乐',
+    tip: '来听歌吧。DJ, drop the beat！',
+    url: '/video',
+    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132202688.png',
+  },
+  {
+    name: '视频',
+    tip: '视频，启动！！！',
+    url: '/video',
+    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132303752.png',
+  },
+  {
+    name: '图库',
+    tip: 'AIGC, yyds！！！',
+    url: '/video',
+    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132207985.png',
+  },
+]);
+defaultImg: 'images/img-error.jpg'; // 默认图片
+
+function jumpUrl(url){
+  debugger
+  window.location.href = url;
+}
+
+onMounted(() => {
+  
+});
+</script>
+
+<style lang="stylus" scoped>
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  .banner-item {
+    position: relative;
+    height: 160px;
+    width: 257px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 0 5px;
+    &:hover {
+      img {
+        transform: scale(1.2);
+      }
+      .info {
+        visibility: visible;
+        opacity: 1;
+        h3,
+        p {
+          transform: translateX(0);
+        }
+      }
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1);
+      transition: all 0.6s;
+    }
+    .info {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      backface-visibility: hidden;
+      background: rgba(0, 0, 0, 0.6);
+      visibility: hidden;
+      opacity: 0;
+      backdrop-filter: blur(5px);
+      transition: all 0.35s ease-in-out;
+      h3 {
+        text-transform: uppercase;
+        color: #fff;
+        text-align: center;
+        font-size: 17px;
+        padding: 10px;
+        background: #111;
+        margin: 30px 0 0;
+        transition: all 0.35s ease-in-out;
+        transform: translateX(-100%);
+      }
+      p {
+        font-style: italic;
+        font-size: 12px;
+        position: relative;
+        color: #bbb;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.35s linear;
+        transform: translateX(100%);
+      }
+    }
+  }
+}
+</style>
