@@ -1,6 +1,6 @@
 <template>
   <div class="banner">
-    <div class="banner-item select-cursor" v-for="(item, index) in bannerList" :key="index" @click="jumpUrl(item.url)">
+    <div class="banner-item select-cursor" v-for="(item, index) in bannerList" :key="index" @click="jumpUrl(item.tip)" @mouseenter="$kbnShowTip(item.tip)">
       <img-lazy class="thumbnail" :src="item.cover || defaultImg" />
       <div class="info">
         <h3>{{ item.name }}</h3>
@@ -37,14 +37,16 @@ const bannerList = ref([
 ]);
 defaultImg: 'images/img-error.jpg'; // 默认图片
 
-function jumpUrl(url){
-  debugger
+function jumpUrl(url) {
   window.location.href = url;
 }
 
-onMounted(() => {
-  
-});
+function showKbnTip(text) {
+  // 看板娘提示
+  this.$kbnShowTip(text);
+}
+
+onMounted(() => {});
 </script>
 
 <style lang="stylus" scoped>
