@@ -1,30 +1,27 @@
 <template>
   <div class="home-blog">
     <div class="hero">
-      <div class="hero-bg" :class="{'show' : bgLoaded && !(preClicked || nextClicked), 'back-in-right' : nextClicked, 'back-in-left' : preClicked }" :style="{ ...bgImageStyle }"></div>
+      <div class="hero-bg" :class="{ show: bgLoaded && !(preClicked || nextClicked), 'back-in-right': nextClicked, 'back-in-left': preClicked }" :style="{ ...bgImageStyle }"></div>
 
       <span class="anchor-down" @click="scrollFn" @mouseenter="$kbnShowTip('点击这里，探索未知的世界~')"></span>
 
-      <!-- <VideoPlayer url="https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/video/花火PV/花火PV.m3u8" style="position: absolute; bottom: 80px; right: 0; z-index: 100;"></VideoPlayer> -->
-
       <div class="video-wrapper">
-        <video
-          ref="videoRef"
+        <VideoPlayer
           v-if="$frontmatter.bgVideo && showBgVideo"
+          ref="videoRef"
           class="hero-video"
-          :src="$frontmatter.bgVideo"
-          preload="auto"
+          :url="$frontmatter.bgVideo"
           @loadedmetadata="loadedMetaData"
           @canplay="videoCanPlay"
           @waiting="handleVideoWaiting"
           @playing="handleVideoPlay"
           @pause="handleVideoPause"
-          @error="handleVideoError"
-          ></video>
+          @error="handleVideoError">
+        </VideoPlayer>
         <div class="video-btn" :class="{ 'video-play': !isPlay, 'video-pause': isPlay }" @click="toggleVideoStatus" @mouseenter="$kbnShowTip('想看视频吗？可以先从左下角关闭音乐呢~')"></div>
         <div v-if="showBgVideo" class="video-btn video-close" @click="closeBgVideo"></div>
         <div class="video-stu" :class="{ show: showBgVideo && (!isVideoInit || !isCanPlay || !isPlay) }">
-          <span v-if="!isVideoInit">{{isError ? '视频加载出错' : '视频加载中...'}}</span>
+          <span v-if="!isVideoInit">{{ isError ? '视频加载出错' : '视频加载中...' }}</span>
           <span v-if="isVideoInit && isCanPlay && !isPlay">已暂停...</span>
           <span v-if="isVideoInit && !isCanPlay">缓冲中...</span>
         </div>
@@ -61,7 +58,7 @@
     </div>
 
     <Banner v-show="recoShowModule" />
-    
+
     <ModuleTransition delay="0.16">
       <div v-show="recoShowModule" class="home-blog-wrapper">
         <div class="blog-list">
@@ -169,7 +166,7 @@ export default defineComponent({
 
       return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle;
     });
-    
+
     const preClicked = ref(false);
     const nextClicked = ref(false);
     const changeBg = (e, isPre = false) => {
@@ -184,19 +181,19 @@ export default defineComponent({
       const url = instance.$themeConfig.heroImages[Math.abs(bgIndex.value) % instance.$themeConfig.heroImages.length];
       bgImage.value = url ? instance.$withBase(url) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
       isBgLoaded();
-    }
+    };
 
-    const isBgLoaded = ()=>{
+    const isBgLoaded = () => {
       let img = new Image();
       img.src = bgImage.value;
-      img.onload = ()=>{
+      img.onload = () => {
         bgLoaded.value = true;
         img = null;
-      }
-      img.onerror = ()=>{
+      };
+      img.onerror = () => {
         img = null;
-      }
-    }
+      };
+    };
 
     onMounted(() => {
       state.heroHeight = document.querySelector('.hero').clientHeight;
@@ -271,13 +268,13 @@ export default defineComponent({
     },
     toggleVideoStatus() {
       if (this.isPlay) {
-        this.$refs.videoRef.pause();
+        this.$refs.videoRef.player.pause();
       } else {
         if (!this.showBgVideo) {
           this.showBgVideo = true;
         }
         this.$nextTick(() => {
-          this.$refs.videoRef.play();
+          this.$refs.videoRef.player.play();
         });
       }
     },
@@ -296,14 +293,16 @@ export default defineComponent({
       console.log('waiting');
       this.isCanPlay = false;
     },
-    handleVideoError(){
+    handleVideoError() {
       this.isError = true;
     },
     closeBgVideo() {
       this.showBgVideo = false;
-      setTimeout(() => { // 等待动画结束
+      setTimeout(() => {
+        // 等待动画结束
         this.isVideoInit = false;
         this.isPlay = false;
+        this.isError = false;
       }, 400);
     },
     handleIntersection(entries) {
