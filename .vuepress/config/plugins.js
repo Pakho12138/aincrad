@@ -1,11 +1,11 @@
-const BASE_URL = 'https://pakhoc.gitee.io';
+const BASE_URL = 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN';
 const MUSIC_LIST = [
     { artist: 'YOASOBI', name: '夜に駆ける' },
 ].map((music) => ({
     name: music.name,
     artist: music.artist,
-    url: `${BASE_URL}/assets/music/${music.name}.mp3`,
-    cover: `${BASE_URL}/assets/music/${music.name}.png`,
+    url: `${BASE_URL}/music/${music.name}.mp3`,
+    cover: `${BASE_URL}/music_pic/${music.name}.png`,
 }))
 
 module.exports = [
@@ -60,7 +60,7 @@ module.exports = [
                 hoverTips: ['心里的花，我想要带你回家', '我的愿望是 ~ 世界和平！！！', '汪，汪汪~', ' (*･´ω`･)っ'],
                 clickTips: ['嗷呜~', 'o(*￣▽￣*)o'],
             },
-            modelStyle: { left: '20px', bottom: '-50px'},
+            modelStyle: { left: '20px', bottom: '-50px' },
             messageStyle: { left: '20px', bottom: '250px' },
             width: 250,
             height: 320
@@ -142,7 +142,7 @@ module.exports = [
     // 图片懒加载
     [
         'plugins/vuepress-plugin-img-lazy',
-        { 
+        {
             useNative: false, // 是否使用img原生懒加载
             loadImage: 'images/img-loading.gif',
             errorImage: 'images/img-error.jpg'
