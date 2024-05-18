@@ -54,7 +54,7 @@ onMounted(() => {});
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
+  padding-top: 20px;
   .banner-item {
     position: relative;
     height: 160px;

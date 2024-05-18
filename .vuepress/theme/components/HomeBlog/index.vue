@@ -57,7 +57,20 @@
       <component v-if="bubbles && !isPlay" :is="bubbles" :options="options"></component>
     </div>
 
-    <Banner v-show="recoShowModule" />
+    <div class="pokeball" :class="{ shake: showShakeAnimate }" @mouseenter="$kbnShowTip('点下中间的按钮看看~')">
+      <div class="ball-top"></div>
+      <div class="ball-center">
+        <div class="ball-line"></div>
+        <div class="ball-btn">
+          <div class="btn-inner select-cursor" @click="handleShowBanner"></div>
+        </div>
+      </div>
+      <div class="ball-bottom"></div>
+    </div>
+
+    <div v-show="showBanner" class="animate-wrapper" :class="{ minisize: hideBannerAnimate, maxsize: showBannerAnimate }">
+      <Banner v-show="recoShowModule" />
+    </div>
 
     <ModuleTransition delay="0.16">
       <div v-show="recoShowModule" class="home-blog-wrapper">
@@ -124,6 +137,11 @@ export default defineComponent({
         rootMargin: '0px',
         threshold: 0,
       },
+      showBanner: false,
+      showBannerAnimate: false,
+      hideBannerAnimate: false,
+      showShakeAnimate: false,
+      timer: null,
     };
   },
   setup(props, ctx) {
@@ -314,6 +332,35 @@ export default defineComponent({
           }
         }
       });
+    },
+    handleShowBanner() {
+      if (this.timer) {
+        return;
+      }
+      if (this.showBanner) {
+        // 收起菜单
+        this.hideBannerAnimate = true;
+        this.timer = setTimeout(() => {
+          this.timer = null;
+          this.hideBannerAnimate = false;
+          this.showBanner = false;
+          // 收起之后，精灵球摇晃的动画
+          this.showShakeAnimate = true;
+          setTimeout(() => {
+            this.$kbnShowTip('我收服神奇宝贝了~');
+            this.showShakeAnimate = false;
+          }, 3000);
+        }, 2000);
+      } else {
+        // 显示菜单
+        this.$kbnShowTip('出来吧！皮卡丘~');
+        this.showBannerAnimate = true;
+        this.showBanner = true;
+        this.timer = setTimeout(() => {
+          this.timer = null;
+          this.showBannerAnimate = false;
+        }, 2000);
+      }
     },
   },
 });
@@ -924,5 +971,101 @@ export default defineComponent({
     0%,100% {
       transform: translate(0,0) rotate(0)
     }
+}
+
+.pokeball {
+  position: relative;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  margin: 40px auto 20px;
+  transform-origin: bottom;
+  overflow: hidden;
+  &.shake {
+    animation: shake 3s ease both;
+  }
+  .ball-top {
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(45deg, rgb(191,30,46) ,rgb(205,56,75), #fff);
+  }
+  .ball-center {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    .ball-line {
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(45deg, #000 66%, #fff);
+    }
+    .ball-btn {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        background: rgb(230, 231, 233);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        border: 6px solid;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .btn-inner {
+          width: 60%;
+          height: 60%;
+          border-radius: 50%;
+          background: #e6e7e9;
+          border: 2px solid #666;
+          filter: brightness(1.05);
+          &:active {
+            filter: brightness(0.9);
+          }
+        }
+    }
+  }
+  .ball-bottom {
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(45deg, #999, rgb(230,231,233), #fff);
+  }
+}
+
+.animate-wrapper {
+  animation: none;
+  &.minisize {
+    animation: minisize 2s ease both;
+  }
+  &.maxsize {
+    animation: minisize 1.5s reverse both;
+  }
+}
+
+@keyframes minisize {
+  0% {
+    transform: scale(1) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  60% {
+    transform: scale(0) matrix3d(0.01, 0, 0, 0, 0, 1, 0, -0.01, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  100% {
+    transform: scale(0);
+    margin-top: -200px;
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  25% {
+    transform: rotate(25deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-25deg);
+  }
 }
 </style>
