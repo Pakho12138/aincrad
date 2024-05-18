@@ -7,7 +7,7 @@ module.exports = {
   base: '/aincrad/',
   title: "AINCRAD",
   description: "愿此行，终抵群星",
-  dest: "public",
+  dest: "dist",
   permalink: "/:slug", // 开启永久路径
   head: [
     [
@@ -101,7 +101,7 @@ module.exports = {
     author: "Pakho",
     authorAvatar: "/avatar.png",
     noFoundPageByTencent: false, //关闭404
-    record: "v1.0.0",
+    record: "v2.0.0",
     startYear: "2023",
     // 评论插件
     valineConfig: {

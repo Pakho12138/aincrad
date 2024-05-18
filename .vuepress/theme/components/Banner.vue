@@ -17,20 +17,26 @@ const { proxy } = getCurrentInstance();
 
 const bannerList = ref([
   {
-    name: '音乐',
-    tip: '来听歌吧。DJ, drop the beat！',
+    name: '暂未开放',
+    tip: '暂未开放呦~',
+    // name: '音乐',
+    // tip: '来听歌吧。DJ, drop the beat！',
     url: '/video',
     cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132202688.png',
   },
   {
-    name: '视频',
-    tip: '视频，启动！！！',
+    name: '暂未开放',
+    tip: '暂未开放呦~',
+    // name: '视频',
+    // tip: '视频，启动！！！',
     url: '/video',
     cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132303752.png',
   },
   {
-    name: '图库',
-    tip: 'AIGC, yyds！！！',
+    name: '暂未开放',
+    tip: '暂未开放呦~',
+    // name: '图库',
+    // tip: 'AIGC, yyds！！！',
     url: '/video',
     cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132207985.png',
   },
