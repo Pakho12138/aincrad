@@ -11,6 +11,7 @@
           ref="videoRef"
           class="hero-video"
           :url="$frontmatter.bgVideo"
+          :style="{ opacity : isVideoInit ? 1 : 0 }"
           @loadedmetadata="loadedMetaData"
           @canplay="videoCanPlay"
           @waiting="handleVideoWaiting"
@@ -746,34 +747,28 @@ export default defineComponent({
 @keyframes backInRight {
   0% {
     transform: translateX(2000px) scale(0.8);
-    opacity: 0.7;
   }
 
   80% {
     transform: translateX(0px) scale(0.8);
-    opacity: 0.7;
   }
 
   100% {
     transform: scale(1);
-    opacity: 1;
   }
 }
 
 @keyframes backInLeft {
   0% {
     transform: translateX(-2000px) scale(0.8);
-    opacity: 0.7;
   }
 
   80% {
     transform: translateX(0px) scale(0.8);
-    opacity: 0.7;
   }
 
   100% {
     transform: scale(1);
-    opacity: 1;
   }
 }
 
@@ -1036,10 +1031,10 @@ export default defineComponent({
 .animate-wrapper {
   animation: none;
   &.minisize {
-    animation: minisize 2s ease both;
+    animation: minisize 1.5s ease both;
   }
   &.maxsize {
-    animation: minisize 1.5s reverse both;
+    animation: minisize 1s reverse both;
   }
 }
 
