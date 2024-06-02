@@ -30,7 +30,8 @@ const bannerList = ref([
     // name: '视频',
     // tip: '视频，启动！！！',
     url: '/video',
-    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132303752.png',
+    // cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132303752.png',
+    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202406022348221.png',
   },
   {
     name: '暂未开放',
