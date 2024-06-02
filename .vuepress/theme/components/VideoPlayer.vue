@@ -78,4 +78,7 @@ defineExpose({
 :deep(.xgplayer-start) {
   display: none !important;
 }
+:deep(video){
+  object-fit: cover;
+}
 </style>

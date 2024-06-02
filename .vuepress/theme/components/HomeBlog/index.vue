@@ -1,7 +1,11 @@
 <template>
   <div class="home-blog">
     <div class="hero">
-      <div class="hero-bg" :class="{ show: bgLoaded && !(preClicked || nextClicked), 'back-in-right': nextClicked, 'back-in-left': preClicked }" :style="{ ...bgImageStyle }"></div>
+      <!-- 原背景 -->
+      <!-- <div class="hero-bg" :class="{ show: bgLoaded && !(preClicked || nextClicked), 'back-in-right': nextClicked, 'back-in-left': preClicked }" :style="{ ...bgImageStyle }"></div> -->
+
+      <!-- swiper背景 -->
+      <Background ref="bgRef" :initialSlide="bgIndex"></Background>
 
       <span class="anchor-down" @click="scrollFn" @mouseenter="$kbnShowTip('点击这里，探索未知的世界~')"></span>
 
@@ -11,7 +15,7 @@
           ref="videoRef"
           class="hero-video"
           :url="$frontmatter.bgVideo"
-          :style="{ opacity : isVideoInit ? 1 : 0 }"
+          :style="{ opacity: isVideoInit ? 1 : 0 }"
           @loadedmetadata="loadedMetaData"
           @canplay="videoCanPlay"
           @waiting="handleVideoWaiting"
@@ -58,6 +62,7 @@
       <component v-if="bubbles && !isPlay" :is="bubbles" :options="options"></component>
     </div>
 
+    <!-- 精灵球 -->
     <div class="pokeball" :class="{ shake: showShakeAnimate }" @mouseenter="$kbnShowTip('点下中间的按钮看看~')">
       <div class="ball-top"></div>
       <div class="ball-center">
@@ -68,7 +73,7 @@
       </div>
       <div class="ball-bottom"></div>
     </div>
-
+    <!-- 精灵球的交互菜单 -->
     <div v-show="showBanner" class="animate-wrapper" :class="{ minisize: hideBannerAnimate, maxsize: showBannerAnimate }">
       <Banner v-show="recoShowModule" />
     </div>
@@ -106,7 +111,7 @@
 </template>
 
 <script>
-import { defineComponent, toRefs, ref, reactive, computed, onMounted } from 'vue';
+import { defineComponent, toRefs, ref, reactive, computed, onBeforeMount, onMounted } from 'vue';
 import TagList from '@theme/components/TagList';
 import FriendLink from '@theme/components/FriendLink';
 import NoteAbstract from '@theme/components/NoteAbstract';
@@ -117,9 +122,10 @@ import { useInstance, useShowModule } from '@theme/helpers/composable';
 import Typed from '@theme/lib/typed.js';
 import VideoPlayer from '@theme/components/VideoPlayer';
 import Banner from '@theme/components/Banner.vue';
+import Background from '../Background.vue';
 
 export default defineComponent({
-  components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo, RecoIcon, VideoPlayer, Banner },
+  components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo, RecoIcon, VideoPlayer, Banner, Background },
   data() {
     return {
       recoShow: false,
@@ -172,6 +178,7 @@ export default defineComponent({
     //   return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle;
     // });
 
+    const bgRef = ref('');
     const bgImage = ref('');
     const bgIndex = ref(0);
     const bgLoaded = ref(false);
@@ -189,39 +196,47 @@ export default defineComponent({
     const preClicked = ref(false);
     const nextClicked = ref(false);
     const changeBg = (e, isPre = false) => {
-      preClicked.value = isPre;
-      nextClicked.value = !isPre;
-      setTimeout(() => {
-        preClicked.value = false;
-        nextClicked.value = false;
-      }, 1000);
-      bgLoaded.value = false;
-      isPre ? bgIndex.value-- : bgIndex.value++;
-      const url = instance.$themeConfig.heroImages[Math.abs(bgIndex.value) % instance.$themeConfig.heroImages.length];
-      bgImage.value = url ? instance.$withBase(url) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
-      isBgLoaded();
+      // preClicked.value = isPre;
+      // nextClicked.value = !isPre;
+      // setTimeout(() => {
+      //   preClicked.value = false;
+      //   nextClicked.value = false;
+      // }, 1000);
+      // bgLoaded.value = false;
+      // isPre ? bgIndex.value-- : bgIndex.value++;
+      // const url = instance.$themeConfig.heroImages[Math.abs(bgIndex.value) % instance.$themeConfig.heroImages.length];
+      // bgImage.value = url ? instance.$withBase(url) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
+      // isBgLoaded();
+      if (isPre) {
+        instance.$refs.bgRef.swiper.slidePrev();
+      } else {
+        instance.$refs.bgRef.swiper.slideNext();
+      }
     };
 
-    const isBgLoaded = () => {
-      let img = new Image();
-      img.src = bgImage.value;
-      img.onload = () => {
-        bgLoaded.value = true;
-        img = null;
-      };
-      img.onerror = () => {
-        img = null;
-      };
-    };
+    // const isBgLoaded = () => {
+    //   let img = new Image();
+    //   img.src = bgImage.value;
+    //   img.onload = () => {
+    //     bgLoaded.value = true;
+    //     img = null;
+    //   };
+    //   img.onerror = () => {
+    //     img = null;
+    //   };
+    // };
+
+    onBeforeMount(() => {
+      bgIndex.value = Math.floor(Math.random() * instance.$themeConfig.heroImages.length);
+    });
 
     onMounted(() => {
       state.heroHeight = document.querySelector('.hero').clientHeight;
       state.recoShow = true;
-
-      bgIndex.value = Math.floor(Math.random() * instance.$themeConfig.heroImages.length);
-      const randomBg = instance.$themeConfig.heroImages[bgIndex.value];
-      bgImage.value = randomBg ? instance.$withBase(randomBg) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
-      isBgLoaded();
+      // bgIndex.value = Math.floor(Math.random() * instance.$themeConfig.heroImages.length);
+      // const randomBg = instance.$themeConfig.heroImages[bgIndex.value];
+      // bgImage.value = randomBg ? instance.$withBase(randomBg) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
+      // isBgLoaded();
 
       new Typed('#description', {
         strings: instance.$frontmatter.tagline || instance.$description,
@@ -233,7 +248,7 @@ export default defineComponent({
       });
     });
 
-    return { recoShowModule, heroImageStyle, bgImageStyle, ...toRefs(state), getOneColor, changeBg, bgLoaded, preClicked, nextClicked };
+    return { recoShowModule, heroImageStyle, bgImageStyle, ...toRefs(state), getOneColor, changeBg, bgLoaded, preClicked, nextClicked, bgIndex };
   },
   mounted() {
     console.log(
