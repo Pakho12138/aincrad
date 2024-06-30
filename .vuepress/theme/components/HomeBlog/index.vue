@@ -214,29 +214,28 @@ export default defineComponent({
       }
     };
 
-    // const isBgLoaded = () => {
-    //   let img = new Image();
-    //   img.src = bgImage.value;
-    //   img.onload = () => {
-    //     bgLoaded.value = true;
-    //     img = null;
-    //   };
-    //   img.onerror = () => {
-    //     img = null;
-    //   };
-    // };
+    const isBgLoaded = () => {
+      let img = new Image();
+      img.src = bgImage.value;
+      img.onload = () => {
+        bgLoaded.value = true;
+        img = null;
+      };
+      img.onerror = () => {
+        img = null;
+      };
+    };
 
     onBeforeMount(() => {
       bgIndex.value = Math.floor(Math.random() * instance.$themeConfig.heroImages.length);
+      const randomBg = instance.$themeConfig.heroImages[bgIndex.value];
+      bgImage.value = randomBg ? instance.$withBase(randomBg) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
+      isBgLoaded();
     });
 
     onMounted(() => {
       state.heroHeight = document.querySelector('.hero').clientHeight;
       state.recoShow = true;
-      // bgIndex.value = Math.floor(Math.random() * instance.$themeConfig.heroImages.length);
-      // const randomBg = instance.$themeConfig.heroImages[bgIndex.value];
-      // bgImage.value = randomBg ? instance.$withBase(randomBg) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
-      // isBgLoaded();
 
       new Typed('#description', {
         strings: instance.$frontmatter.tagline || instance.$description,

@@ -11,6 +11,12 @@ module.exports = {
   permalink: "/:slug", // 开启永久路径
   head: [
     [
+      'script',
+      {
+        src: "/js/index.min.js"
+      }
+    ],
+    [
       'link',
       {
         rel: "icon",
@@ -111,7 +117,7 @@ module.exports = {
     },
     heroImages: [
       // 'https://pakhoc.gitee.io/assets/images/bannerBg.png',
-      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202404120938761.jpg',
+      'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202406302329976.jpg',
       'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251812451.jpg',
       'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251850712.jpg',
       'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/image/202401251850711.jpg',
