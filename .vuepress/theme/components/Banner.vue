@@ -21,15 +21,13 @@ const bannerList = ref([
     tip: '暂未开放呦~',
     // name: '音乐',
     // tip: '来听歌吧。DJ, drop the beat！',
-    url: '/video',
+    url: '',
     cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132202688.png',
   },
   {
-    name: '暂未开放',
-    tip: '暂未开放呦~',
-    // name: '视频',
-    // tip: '视频，启动！！！',
-    url: '/video',
+    name: 'MMD',
+    tip: '基于threeJS实现的MMD播放器',
+    url: 'https://pakho12138.github.io/MMDWebViewer/',
     // cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132303752.png',
     cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202406022348221.png',
   },
@@ -38,7 +36,7 @@ const bannerList = ref([
     tip: '暂未开放呦~',
     // name: '图库',
     // tip: 'AIGC, yyds！！！',
-    url: '/video',
+    url: '',
     cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132207985.png',
   },
 ]);
@@ -46,6 +44,7 @@ defaultImg: 'images/img-error.jpg'; // 默认图片
 
 function jumpUrl(url) {
   // window.location.href = url;
+  url && window.open(url, '_blank');
 }
 
 function showKbnTip(text) {

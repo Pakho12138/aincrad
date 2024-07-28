@@ -144,7 +144,7 @@ export default defineComponent({
         rootMargin: '0px',
         threshold: 0,
       },
-      showBanner: false,
+      showBanner: true,
       showBannerAnimate: false,
       hideBannerAnimate: false,
       showShakeAnimate: false,
