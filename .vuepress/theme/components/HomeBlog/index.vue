@@ -208,10 +208,13 @@ export default defineComponent({
       // bgImage.value = url ? instance.$withBase(url) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
       // isBgLoaded();
       if (isPre) {
+        bgIndex.value = --bgIndex.value % instance.$themeConfig.heroImages.length;
         instance.$refs.bgRef.swiper.slidePrev();
       } else {
+        bgIndex.value = ++bgIndex.value % instance.$themeConfig.heroImages.length;
         instance.$refs.bgRef.swiper.slideNext();
       }
+      localStorage.setItem('bgIndex', instance.$refs.bgRef.swiper.realIndex);
     };
 
     const isBgLoaded = () => {
@@ -226,8 +229,29 @@ export default defineComponent({
       };
     };
 
+    // 根据当前时间弹出不同问候语
+    const greetingByTime = () => {
+      let tip = '';
+      const curHour = new Date().getHours();
+      if (curHour >= 0 && curHour < 7) {
+        tip = '夜深了，好好做个美梦吧，晚安！';
+      } else if (curHour >= 7 && curHour < 12) {
+        tip = '一日之计在于晨，加油！';
+      } else if (curHour >= 12 && curHour < 17) {
+        tip = '午后很容易犯困呢，幸福地睡个午觉吧！';
+      } else if (curHour >= 17 && curHour < 20) {
+        tip = '傍晚了，和家人好好吃顿饭吧！';
+      } else if (curHour >= 20 && curHour < 24) {
+        tip = '晚上好，今天过得怎么样？';
+      }
+      instance.$kbnShowTip(tip);
+    };
+
     onBeforeMount(() => {
-      bgIndex.value = Math.floor(Math.random() * instance.$themeConfig.heroImages.length);
+      greetingByTime();
+
+      // bgIndex.value = Math.floor(Math.random() * instance.$themeConfig.heroImages.length); // 现有列表条数内产生随机数
+      bgIndex.value = +(localStorage.getItem('bgIndex') || 0);
       const randomBg = instance.$themeConfig.heroImages[bgIndex.value];
       bgImage.value = randomBg ? instance.$withBase(randomBg) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
       isBgLoaded();
