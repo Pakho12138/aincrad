@@ -27,7 +27,8 @@ const bannerList = ref([
   {
     name: 'MMD',
     tip: '基于threeJS实现的MMD播放器',
-    url: 'https://pakho12138.github.io/MMDWebViewer/',
+    url: 'https://mmdviewer.pages.dev/',
+    // url: 'https://pakho12138.github.io/MMDWebViewer/',
     // cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132303752.png',
     cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202406022348221.png',
   },
