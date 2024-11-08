@@ -10,12 +10,12 @@ module.exports = {
   dest: "dist",
   permalink: "/:slug", // 开启永久路径
   head: [
-    [
-      'script',
-      {
-        src: "/js/index.min.js"
-      }
-    ],
+    // [
+    //   'script',
+    //   {
+    //     src: "/js/index.min.js" // 自动处理cdn路径
+    //   }
+    // ],
     [
       'link',
       {

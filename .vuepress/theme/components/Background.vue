@@ -3,7 +3,8 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide" v-for="(url, index) in $themeConfig.heroImages" :key="index">
         <!-- <img :src="url" v-if="index==0||index==($themeConfig.heroImages.length-1)" /> -->
-        <img-lazy :src="url" />
+        <img :data-src="url" class="swiper-lazy" />
+        <div class="swiper-lazy-preloader swiper-lazy-preloader"></div>
       </div>
     </div>
   </div>
@@ -33,6 +34,12 @@ onMounted(() => {
     loop: true,
     speed: 500,
     effect: 'fade',
+    lazy: {
+      // 懒加载
+      loadPrevNext: true, // 允许将延迟加载应用到最接近的slide的图片（前一个和后一个slide）
+      loadPrevNextAmount: 2, // 设置在延迟加载图片时提前多少个slide
+      loadOnTransitionStart: true, // 当slide在transition开始时加载图片
+    },
   });
 });
 
@@ -43,6 +50,7 @@ defineExpose({
 
 <style lang="stylus" scoped>
 .swiper-container {
+  --swiper-theme-color: $accentColor; // swiper 主题色
   position: absolute;
   width: 100%;
   height: 100%;
