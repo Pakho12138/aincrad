@@ -4,7 +4,7 @@ tags:
   - Git
 categories:
   - 前端
-image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132231658.png
+image: https://ghcdn.pages.dev/other/202404132231658.png
 ---
 
 # 自动打包并部署到 Github 脚本

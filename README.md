@@ -28,8 +28,8 @@ tagline: ['To love oneself is the beginning of a life long romance.']
 # }
 bgImage: https://pakhoc.gitee.io/assets/images/bannerBg.png
 # 使用cdn
-bgVideo: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/video/YOASOBI_BiriBiri/YOASOBI_BiriBiri.m3u8
-# bgVideo: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/video/花火PV/花火PV.m3u8
+bgVideo: https://ghcdn.pages.dev/video/YOASOBI_BiriBiri/YOASOBI_BiriBiri.m3u8
+# bgVideo: https://ghcdn.pages.dev/video/花火PV/花火PV.m3u8
 # bgImageStyle: {
 #   height: '1000px'
 # }

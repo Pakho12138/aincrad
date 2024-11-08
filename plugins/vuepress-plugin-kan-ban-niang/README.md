@@ -1,5 +1,5 @@
 ---
-image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132314013.png
+image: https://ghcdn.pages.dev/other/202404132314013.png
 ---
 
 # @vuepress-reco/vuepress-plugin-kan-ban-niang

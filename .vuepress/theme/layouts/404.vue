@@ -4,7 +4,7 @@
       <h1>404</h1>
       <blockquote>{{ getMsg() }}</blockquote>
       <router-link to="/">Take me home.</router-link>
-      <img-lazy src="https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404141051488.png" />
+      <img-lazy src="https://ghcdn.pages.dev/other/202404141051488.png" />
     </article>
   </section>
 </template>

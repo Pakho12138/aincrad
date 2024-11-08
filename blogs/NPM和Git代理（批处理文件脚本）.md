@@ -5,7 +5,7 @@ tags:
   - npm
 categories:
   - 脚本
-image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404131533069.png
+image: https://ghcdn.pages.dev/other/202404131533069.png
 ---
 
 # NPM 和 Git 代理（批处理文件脚本）

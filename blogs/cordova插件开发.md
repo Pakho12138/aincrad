@@ -4,7 +4,7 @@ tags:
   - Cordova
 categories:
   - 前端
-image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132221238.png
+image: https://ghcdn.pages.dev/other/202404132221238.png
 ---
 
 # Cordova 插件开发

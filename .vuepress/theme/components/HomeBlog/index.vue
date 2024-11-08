@@ -467,13 +467,13 @@ export default defineComponent({
           opacity: 1;
         }
         &.video-play {
-          background: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202403221729599.png);
+          background: url(https://ghcdn.pages.dev/other/202403221729599.png);
         }
         &.video-pause {
-          background: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202403221738731.png);
+          background: url(https://ghcdn.pages.dev/other/202403221738731.png);
         }
         &.video-close {
-          background: url(https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404030926646.png);
+          background: url(https://ghcdn.pages.dev/other/202404030926646.png);
           left: 5px;
         }
       }

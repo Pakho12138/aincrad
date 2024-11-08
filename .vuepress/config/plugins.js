@@ -1,4 +1,4 @@
-const BASE_URL = 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN';
+const BASE_URL = 'https://ghcdn.pages.dev';
 const MUSIC_LIST = [
     { artist: 'YOASOBI', name: '夜に駆ける' },
 ].map((music) => ({

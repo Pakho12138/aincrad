@@ -5,7 +5,7 @@ tags:
   - 字体
 categories:
   - 前端
-image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202406022350939.jpg
+image: https://ghcdn.pages.dev/other/202406022350939.jpg
 ---
 
 # 使用字蛛（FontSpider）压缩字体
@@ -38,7 +38,7 @@ yarn add font-spider -g
 
 #### 目录结构
 
-![image-20240602230457678](https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202406022312557.png)
+![image-20240602230457678](https://ghcdn.pages.dev/other/202406022312557.png)
 
 #### 编写css和html
 
@@ -94,10 +94,10 @@ font-spider ./index.html
 
 可以看出13291 KB的字体压缩后只有841.916 KB!
 
-![image-20240602231206539](https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202406022313134.png)
+![image-20240602231206539](https://ghcdn.pages.dev/other/202406022313134.png)
 
 #### 使用压缩后的目录
 
 压缩后的目录多出四个文件以及一个文件夹 ***原始文件存放在.font-spider文件夹中***
 
-![image-20240602232637470](https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202406022332079.png)
+![image-20240602232637470](https://ghcdn.pages.dev/other/202406022332079.png)

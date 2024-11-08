@@ -28,7 +28,7 @@ const initPlayer = () => {
   playerInstance.value = new Player({
     id: 'mse',
     url: props.url,
-    // url: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/video/YOASOBI - BiriBiri Official Music Video.mp4',
+    // url: 'https://ghcdn.pages.dev/video/YOASOBI - BiriBiri Official Music Video.mp4',
     height: '100%',
     width: '100%',
     autoplay: true,

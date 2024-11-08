@@ -4,7 +4,7 @@ tags:
   - npm
 categories:
   - 脚本
-image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132211993.png
+image: https://ghcdn.pages.dev/other/202404132211993.png
 ---
 
 # npm install 报错 ERR code ETIMEDOUT 的解决办法

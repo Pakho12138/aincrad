@@ -1,5 +1,5 @@
 ---
-image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132318931.png
+image: https://ghcdn.pages.dev/other/202404132318931.png
 ---
 
 # vuepress-plugin-img-lazy

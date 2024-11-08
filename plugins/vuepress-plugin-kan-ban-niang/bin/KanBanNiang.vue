@@ -118,15 +118,15 @@ export default {
         izumi:
           "https://cdn.jsdelivr.net/gh/QiShaoXuan/live2DModel@1.0.0/live2d-widget-model-izumi/assets/izumi.model.json",
         shizuku:
-          "https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/live2d/shizuku/assets/shizuku.model.json",
+          "https://ghcdn.pages.dev/live2d/shizuku/assets/shizuku.model.json",
         wanko:
-          "https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/live2d/wanko/assets/wanko.model.json",
+          "https://ghcdn.pages.dev/live2d/wanko/assets/wanko.model.json",
         miku: "https://cdn.jsdelivr.net/gh/QiShaoXuan/live2DModel@1.0.0/live2d-widget-model-miku/assets/miku.model.json",
         z16: "https://cdn.jsdelivr.net/gh/QiShaoXuan/live2DModel@1.0.0/live2d-widget-model-z16/assets/z16.model.json",
         shield:
-          "https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/live2d/shield/model1.json",
+          "https://ghcdn.pages.dev/live2d/shield/model1.json",
         xiaomai:
-          "https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/live2d/xiaomai/xiaomai.model.json",
+          "https://ghcdn.pages.dev/live2d/xiaomai/xiaomai.model.json",
       },
       // model的高宽
       style: {

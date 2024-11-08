@@ -4,7 +4,7 @@ tags:
   - ffmpeg
 categories:
   - 技术
-image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202405181531999.jpg
+image: https://ghcdn.pages.dev/other/202405181531999.jpg
 ---
 
 # ffmpeg 教程：视频切片
@@ -19,11 +19,11 @@ image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202405181531999.jpg
 
 复制 ffmpeg 解压后的路径
 
-![image-20240518143458890](https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202405181435295.png)
+![image-20240518143458890](https://ghcdn.pages.dev/other/202405181435295.png)
 
 配置 ffmpeg 环境变量:高级系统设置>环境变量>双击系统变量 Path>新建>粘贴>确认
 
-![微信截图_20240518142422](https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202405181435798.png)
+![微信截图_20240518142422](https://ghcdn.pages.dev/other/202405181435798.png)
 
 ## 2. 视频分割成 ts 文件
 
@@ -31,7 +31,7 @@ image: https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202405181531999.jpg
 
 ### 2.2 打开当前目录 cmd 命令窗口
 
-![image-20240518144051565](https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202405181440981.png)
+![image-20240518144051565](https://ghcdn.pages.dev/other/202405181440981.png)
 
 输入命令：
 
@@ -55,8 +55,8 @@ MPEG2-TS（Transport Stream“传输流”；又称TS、TP、MPEG-TS 或 M2T）
 MPEG2-TS格式的特点就是要求从视频流的任一片段开始都是可以独立解码的。
 ```
 
-![img](https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202405181511544.image)
+![img](https://ghcdn.pages.dev/other/202405181511544.image)
 
 ### 2.3 执行结果
 
-![image-20240518151304679](https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202405181513636.png)
+![image-20240518151304679](https://ghcdn.pages.dev/other/202405181513636.png)

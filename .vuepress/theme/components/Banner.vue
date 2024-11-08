@@ -22,15 +22,15 @@ const bannerList = ref([
     // name: '音乐',
     // tip: '来听歌吧。DJ, drop the beat！',
     url: '',
-    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132202688.png',
+    cover: 'https://ghcdn.pages.dev/other/202404132202688.png',
   },
   {
     name: 'MMD',
     tip: '基于threeJS实现的MMD播放器',
     url: 'https://mmdviewer.pages.dev/',
     // url: 'https://pakho12138.github.io/MMDWebViewer/',
-    // cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132303752.png',
-    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202406022348221.png',
+    // cover: 'https://ghcdn.pages.dev/other/202404132303752.png',
+    cover: 'https://ghcdn.pages.dev/other/202406022348221.png',
   },
   {
     name: '暂未开放',
@@ -38,7 +38,7 @@ const bannerList = ref([
     // name: '图库',
     // tip: 'AIGC, yyds！！！',
     url: '',
-    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/202404132207985.png',
+    cover: 'https://ghcdn.pages.dev/other/202404132207985.png',
   },
 ]);
 defaultImg: 'images/img-error.jpg'; // 默认图片
