@@ -14,6 +14,7 @@
 import { onMounted, ref } from 'vue';
 import Swiper from 'swiper';
 import 'swiper/css/swiper.min.css';
+import { EventBus } from '../helpers/eventBus';
 
 const props = defineProps({
   // 播放视频的路径'
@@ -39,6 +40,16 @@ onMounted(() => {
       loadPrevNext: true, // 允许将延迟加载应用到最接近的slide的图片（前一个和后一个slide）
       loadPrevNextAmount: 2, // 设置在延迟加载图片时提前多少个slide
       loadOnTransitionStart: true, // 当slide在transition开始时加载图片
+    },
+    updateOnImagesReady: true,
+    on: {
+      lazyImageReady: function (slideEl, imageEl) {
+        //图片完成加载时隐藏loading
+        const classList = slideEl.classList;
+        if (classList.contains('swiper-slide-active')) {
+          EventBus.$emit('hideLoading');
+        }
+      },
     },
   });
 });

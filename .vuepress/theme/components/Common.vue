@@ -9,18 +9,18 @@
         <Password v-show="!firstLoad && !isHasKey" class="password-wrapper-out" key="out" />
       </transition>
 
-      <div :class="{ 'hide': firstLoad || !isHasKey }">
+      <div :class="{ hide: firstLoad || !isHasKey }">
         <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
 
         <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
 
         <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
           <PersonalInfo slot="top" />
-          <slot name="sidebar-bottom" slot="bottom"/>
+          <slot name="sidebar-bottom" slot="bottom" />
         </Sidebar>
 
         <Password v-show="!isHasPageKey" :isPage="true" class="password-wrapper-in" key="in"></Password>
-        <div :class="{ 'hide': !isHasPageKey }">
+        <div :class="{ hide: !isHasPageKey }">
           <slot></slot>
         </div>
 
@@ -28,36 +28,37 @@
       </div>
     </div>
     <div v-else>
-        <transition name="fade">
-          <LoadingPage v-if="firstLoad" />
-          <Password v-if="!isHasKey" />
-        </transition>
-        <div v-if="isHasKey">
-          <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar"/>
+      <transition name="fade">
+        <LoadingPage v-if="firstLoad" />
+        <Password v-if="!isHasKey" />
+      </transition>
+      <div v-if="isHasKey">
+        <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
 
-          <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
+        <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
 
-          <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
-            <PersonalInfo slot="top" />
-            <slot name="sidebar-bottom" slot="bottom"/>
-          </Sidebar>
+        <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
+          <PersonalInfo slot="top" />
+          <slot name="sidebar-bottom" slot="bottom" />
+        </Sidebar>
 
-          <Password v-if="!isHasPageKey" :isPage="true"></Password>
-          <slot v-else></slot>
-        </div>
+        <Password v-if="!isHasPageKey" :isPage="true"></Password>
+        <slot v-else></slot>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, computed, ref, onMounted } from 'vue'
-import Navbar from '@theme/components/Navbar'
-import Sidebar from '@theme/components/Sidebar'
-import PersonalInfo from '@theme/components/PersonalInfo'
-import Password from '@theme/components/Password'
-import SubSidebar from '@theme/components/SubSidebar'
-import { setTimeout } from 'timers'
-import { useInstance } from '@theme/helpers/composable'
+import { defineComponent, computed, ref, onMounted } from 'vue';
+import Navbar from '@theme/components/Navbar';
+import Sidebar from '@theme/components/Sidebar';
+import PersonalInfo from '@theme/components/PersonalInfo';
+import Password from '@theme/components/Password';
+import SubSidebar from '@theme/components/SubSidebar';
+import { setTimeout } from 'timers';
+import { useInstance } from '@theme/helpers/composable';
+import { EventBus } from '../helpers/eventBus';
 
 // import LoadingPage from '@theme/components/LoadingPage'
 
@@ -67,116 +68,112 @@ export default defineComponent({
   props: {
     sidebar: {
       type: Boolean,
-      default: true
+      default: true,
     },
     sidebarItems: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     showModule: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
-  setup (props, ctx) {
-    const instance = useInstance()
+  setup(props, ctx) {
+    const instance = useInstance();
 
-    const isSidebarOpen = ref(false)
-    const isHasKey = ref(true)
-    const isHasPageKey = ref(true)
-    const firstLoad = ref(true)
+    const isSidebarOpen = ref(false);
+    const isHasKey = ref(true);
+    const isHasPageKey = ref(true);
+    const firstLoad = ref(true);
 
-    const shouldShowSidebar = computed(() => props.sidebarItems.length > 0)
+    const shouldShowSidebar = computed(() => props.sidebarItems.length > 0);
     const absoluteEncryption = computed(() => {
-      return instance.$themeConfig.keyPage && instance.$themeConfig.keyPage.absoluteEncryption === true
-    })
+      return instance.$themeConfig.keyPage && instance.$themeConfig.keyPage.absoluteEncryption === true;
+    });
     const shouldShowNavbar = computed(() => {
-      const { themeConfig } = instance.$site
-      const { frontmatter } = instance.$page
+      const { themeConfig } = instance.$site;
+      const { frontmatter } = instance.$page;
 
-      if (
-        frontmatter.navbar === false ||
-        themeConfig.navbar === false
-      ) return false
+      if (frontmatter.navbar === false || themeConfig.navbar === false) return false;
 
-      return (
-        instance.$title ||
-        themeConfig.logo ||
-        themeConfig.repo ||
-        themeConfig.nav ||
-        instance.$themeLocaleConfig.nav
-      )
-    })
+      return instance.$title || themeConfig.logo || themeConfig.repo || themeConfig.nav || instance.$themeLocaleConfig.nav;
+    });
 
     const pageClasses = computed(() => {
       const classValue = {
         'no-navbar': !shouldShowNavbar.value,
         'sidebar-open': isSidebarOpen.value,
-        'no-sidebar': !shouldShowSidebar.value
-      }
+        'no-sidebar': !shouldShowSidebar.value,
+      };
 
-      const { pageClass: userPageClass } = instance.$frontmatter || {}
-      if (userPageClass) classValue[userPageClass] = true
+      const { pageClass: userPageClass } = instance.$frontmatter || {};
+      if (userPageClass) classValue[userPageClass] = true;
 
-      return classValue
-    })
+      return classValue;
+    });
 
     const hasKey = () => {
-      const { keyPage } = instance.$themeConfig
+      const { keyPage } = instance.$themeConfig;
       if (!keyPage || !keyPage.keys || keyPage.keys.length === 0) {
-        isHasKey.value = true
-        return
+        isHasKey.value = true;
+        return;
       }
 
-      let { keys } = keyPage
-      keys = keys.map(item => item.toLowerCase())
-      isHasKey.value = keys && keys.indexOf(sessionStorage.getItem('key')) > -1
-    }
+      let { keys } = keyPage;
+      keys = keys.map(item => item.toLowerCase());
+      isHasKey.value = keys && keys.indexOf(sessionStorage.getItem('key')) > -1;
+    };
     const initRouterHandler = () => {
       instance.$router.afterEach(() => {
-        isSidebarOpen.value = false
-      })
-    }
+        isSidebarOpen.value = false;
+      });
+    };
     const hasPageKey = () => {
-      let pageKeys = instance.$frontmatter.keys
+      let pageKeys = instance.$frontmatter.keys;
       if (!pageKeys || pageKeys.length === 0) {
-        isHasPageKey.value = true
-        return
+        isHasPageKey.value = true;
+        return;
       }
 
-      pageKeys = pageKeys.map(item => item.toLowerCase())
+      pageKeys = pageKeys.map(item => item.toLowerCase());
 
-      isHasPageKey.value = pageKeys.indexOf(sessionStorage.getItem(`pageKey${window.location.pathname}`)) > -1
-    }
-    const toggleSidebar = (to) => {
-      isSidebarOpen.value = typeof to === 'boolean' ? to : !isSidebarOpen.value
-    }
+      isHasPageKey.value = pageKeys.indexOf(sessionStorage.getItem(`pageKey${window.location.pathname}`)) > -1;
+    };
+    const toggleSidebar = to => {
+      isSidebarOpen.value = typeof to === 'boolean' ? to : !isSidebarOpen.value;
+    };
     const handleLoading = () => {
-      const time = instance.$frontmatter.home && sessionStorage.getItem('firstLoad') == undefined ? 1000 : 0
       setTimeout(() => {
-        firstLoad.value = false
-        if (sessionStorage.getItem('firstLoad') == undefined) sessionStorage.setItem('firstLoad', false)
-      }, time)
-    }
+        firstLoad.value = false;
+        if (sessionStorage.getItem('firstLoad') == undefined) sessionStorage.setItem('firstLoad', false);
+      });
+    };
+
+    const hideLoading = () => {
+      firstLoad.value = false;
+      if (sessionStorage.getItem('firstLoad') == undefined) sessionStorage.setItem('firstLoad', false);
+    };
 
     onMounted(() => {
-      initRouterHandler()
-      hasKey()
-      hasPageKey()
-      handleLoading()
-    })
+      initRouterHandler();
+      hasKey();
+      hasPageKey();
+      !(instance.$frontmatter.home && sessionStorage.getItem('firstLoad')) && handleLoading()
+      EventBus.$on('hideLoading', hideLoading);
+    });
 
-    return { isSidebarOpen, absoluteEncryption, shouldShowNavbar, shouldShowSidebar, pageClasses, hasKey, hasPageKey, isHasKey, isHasPageKey, toggleSidebar, firstLoad }
+    return { isSidebarOpen, absoluteEncryption, shouldShowNavbar, shouldShowSidebar, pageClasses, hasKey, hasPageKey, isHasKey, isHasPageKey, toggleSidebar, firstLoad };
   },
 
   watch: {
-    $frontmatter (newVal, oldVal) {
-      this.hasKey()
-      this.hasPageKey()
-    }
-  }
-})
+    $frontmatter(newVal, oldVal) {
+      this.hasKey();
+      this.hasPageKey();
+    },
+  },
+});
 </script>
 
 <style lang="stylus" scoped>
